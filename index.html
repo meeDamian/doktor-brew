@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doktor Brew • Brwi i Rzęsy • Olsztyn | Monika Najmowicz</title>
+    <meta name="description" content="Profesjonalne studio brwi i rzęs w Olsztynie. Laminacja, henna, nitkowanie, makijaż permanentny brwi i lifting rzęs. Monika Najmowicz. 5.0/5 na Booksy.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&amp;family=Inter:wght@300;400;500&amp;family=Playfair+Display+SC:wght@400&amp;display=swap');
+        
+        :root {
+            --cream: #f8f4f0;
+            --blush: #e8d9d2;
+            --rose: #c9a9a0;
+            --taupe: #8b6f5c;
+            --espresso: #2f2522;
+            --gold: #c5a46e;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-serif {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-feature-settings: "kern" "tnum" "liga";
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #c9a9a0;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .premium-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .premium-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.05);
+        }
+
+        .service-tab {
+            transition: all 0.3s ease;
+        }
+        
+        .service-tab.active {
+            background-color: #c9a9a0;
+            color: white;
+            border-color: #c9a9a0;
+        }
+
+        .gallery-item {
+            transition: transform 0.4s cubic-bezier(0.4, 0.0, 0.2, 1), box-shadow 0.4s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.015);
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+        }
+
+        .gallery-item img {
+            transition: transform 0.7s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .section-heading {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-heading:after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 48px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #c9a9a0, transparent);
+        }
+
+        .beauty-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .beauty-btn:after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -100%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,0.35),
+                transparent
+            );
+            transition: 0.6s;
+        }
+        
+        .beauty-btn:hover:after {
+            left: 250%;
+        }
+
+        .elegant-shadow {
+            box-shadow: 0 10px 15px -3px rgb(47 37 34 / 0.08), 0 4px 6px -4px rgb(47 37 34 / 0.08);
+        }
+
+        .soft-bg {
+            background-color: #f8f4f0;
+        }
+
+        .nav-scrolled {
+            background-color: rgba(248, 244, 240, 0.96);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 1px 0 0 rgba(201, 169, 160, 0.08);
+        }
+
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .modal {
+            animation: fadeInModal 0.2s ease forwards;
+        }
+
+        @keyframes fadeInModal {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .treatment-video {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+        }
+
+        .masonry-grid {
+            --gallery-column-width: min(100%, 280px);
+            display: grid;
+            grid-template-columns: var(--gallery-column-width);
+            grid-auto-rows: 8px;
+            gap: 1rem;
+            justify-content: center;
+            max-width: 100%;
+            margin-inline: auto;
+        }
+
+        @media (min-width: 640px) {
+            .masonry-grid {
+                --gallery-column-width: 320px;
+                grid-template-columns: repeat(2, var(--gallery-column-width));
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .masonry-grid {
+                grid-template-columns: repeat(3, var(--gallery-column-width));
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .masonry-grid {
+                grid-template-columns: repeat(4, var(--gallery-column-width));
+            }
+        }
+
+        .masonry-grid .gallery-item {
+            width: 100%;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            display: block;
+            height: auto;
+        }
+
+        .hidden-more {
+            display: none;
+        }
+
+        .brow-accent {
+            color: #c9a9a0;
+        }
+
+        .luxury-border {
+            border-color: #e8d9d2;
+        }
+    </style>
+</head>
+<body class="bg-[#f8f4f0] text-[#2f2522] antialiased">
+    <!-- NAV -->
+    <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#f8f4f0]/95 backdrop-blur-lg border-b border-[#e8d9d2]">
+        <div class="max-w-screen-2xl mx-auto">
+            <div class="flex items-center justify-between px-6 lg:px-12 h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-x-3">
+                    <div class="flex items-center gap-x-3">
+                        <img src="assets/images/real-logo.png" alt="Doktor Brew logo" class="h-9 w-auto">
+                        <div class="flex flex-col -mt-0.5">
+                            <span class="heading-serif text-[21px] font-semibold tracking-[2.5px] text-[#2f2522] leading-none">DOKTOR BREW</span>
+                            <span class="text-[9px] font-medium tracking-[2px] text-[#8b6f5c] -mt-px">OLSZTYN</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center gap-x-10 text-sm font-medium tracking-wide">
+                    <a href="#o-nas" class="nav-link text-[#2f2522] hover:text-[#8b6f5c]">O nas</a>
+                    <a href="#uslugi" class="nav-link text-[#2f2522] hover:text-[#8b6f5c]">Usługi</a>
+                    <a href="#techniki" class="nav-link text-[#2f2522] hover:text-[#8b6f5c]">Techniki</a>
+                    <a href="#galeria" class="nav-link text-[#2f2522] hover:text-[#8b6f5c]">Galeria</a>
+                    <a href="#opinie" class="nav-link text-[#2f2522] hover:text-[#8b6f5c]">Opinie</a>
+                    <a href="#kontakt" class="nav-link text-[#2f2522] hover:text-[#8b6f5c]">Kontakt</a>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="hidden md:flex items-center gap-x-3">
+                    <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank"
+                       class="px-6 py-2.5 rounded-full border border-[#c9a9a0] text-sm font-medium tracking-wide hover:bg-[#c9a9a0] hover:text-white transition-all flex items-center gap-x-2">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>Booksy</span>
+                    </a>
+                    <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank"
+                       class="beauty-btn px-8 py-2.5 bg-[#2f2522] hover:bg-[#3f2e2a] text-white text-sm font-medium tracking-wider rounded-full flex items-center gap-x-2">
+                        <span>ZAREZERWUJ</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn"
+                        class="md:hidden w-11 h-11 flex items-center justify-center text-[#2f2522] hover:bg-[#e8d9d2] rounded-full transition-colors"
+                        aria-label="Menu">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-[#e8d9d2] bg-[#f8f4f0]">
+            <div class="px-6 py-8 flex flex-col gap-y-5 text-lg font-medium">
+                <a href="#o-nas" class="mobile-link py-1">O nas</a>
+                <a href="#uslugi" class="mobile-link py-1">Usługi</a>
+                <a href="#techniki" class="mobile-link py-1">Techniki</a>
+                <a href="#galeria" class="mobile-link py-1">Galeria</a>
+                <a href="#opinie" class="mobile-link py-1">Opinie</a>
+                <a href="#kontakt" class="mobile-link py-1">Kontakt</a>
+                
+                <div class="pt-4 flex flex-col gap-3 border-t border-[#e8d9d2]">
+                    <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank"
+                       class="flex items-center justify-center gap-x-2 py-3.5 rounded-2xl border border-[#c9a9a0] text-base font-medium">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>Zarezerwuj na Booksy</span>
+                    </a>
+                    <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank"
+                       class="flex items-center justify-center gap-x-2 py-3.5 bg-[#2f2522] text-white rounded-2xl text-base font-medium">
+                        Umów wizytę
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="relative min-h-[100dvh] flex items-center justify-center pt-20 overflow-hidden">
+        <div class="absolute inset-0 bg-[#2f2522]">
+            <img src="assets/images/real/interior-01.jpg" alt="Wnętrze studia Doktor Brew przy ul. Wyzwolenia w Olsztynie" 
+                 class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/35 via-black/25 to-black/60"></div>
+        </div>
+        
+        <div class="relative max-w-5xl px-6 text-center text-white z-10">
+            <div class="inline-flex items-center gap-x-2 bg-white/10 backdrop-blur-md border border-white/30 rounded-full px-5 py-1 mb-6 text-xs tracking-[3px] font-medium">
+                <div class="w-1.5 h-1.5 bg-[#c9a9a0] rounded-full animate-pulse"></div>
+                <span>OLSZTYN • UL. WYZWOLENIA 18/U2</span>
+            </div>
+            
+            <h1 class="heading-serif text-[92px] md:text-[120px] leading-[0.82] font-semibold tracking-tighter mb-3">
+                DOKTOR<br>BREW
+            </h1>
+            <p class="text-2xl md:text-3xl font-light tracking-wide text-white/90 mb-3">Brwi • Rzęsy • Makijaż permanentny</p>
+            
+            <p class="max-w-md mx-auto text-lg text-white/80 mb-10 tracking-wide">
+                Naturalne piękno w Twoim spojrzeniu.<br>
+                <span class="text-[#c9a9a0]">Monika Najmowicz</span>
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank"
+                   class="beauty-btn group w-full sm:w-auto flex items-center justify-center gap-x-3 px-10 py-[18px] bg-white hover:bg-[#f8f4f0] text-[#2f2522] rounded-full text-base font-semibold tracking-[1.5px]">
+                    <span>ZAREZERWUJ WIZYTĘ</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-0.5 transition"></i>
+                </a>
+                <a href="#uslugi"
+                   class="w-full sm:w-auto flex items-center justify-center gap-x-3 px-9 py-[18px] border border-white/60 hover:bg-white/10 text-white rounded-full text-base font-medium tracking-wider transition-colors">
+                    POZNAJ USŁUGI
+                </a>
+            </div>
+            
+            <div class="mt-12 flex items-center justify-center gap-x-8 text-xs tracking-[2px] text-white/60">
+                <div>5.0 <span class="font-serif">/ 259 OPINII</span></div>
+                <div class="w-px h-3 bg-white/30"></div>
+                <div>BOOKSY #1 OLSZTYN</div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-9 left-1/2 -translate-x-1/2 flex flex-col items-center text-white/50 text-xs tracking-[3px]">
+            <span>PRZESUŃ</span>
+            <i class="fa-solid fa-chevron-down mt-1 animate-bounce"></i>
+        </div>
+    </header>
+
+    <!-- TRUST BAR -->
+    <div class="border-b border-[#e8d9d2] bg-white py-5">
+        <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-center text-sm">
+            <div class="flex items-center gap-x-2 text-[#8b6f5c]">
+                <i class="fa-solid fa-star text-[#c9a9a0]"></i>
+                <span class="font-medium">5.0 na Booksy</span>
+            </div>
+            <div class="text-[#8b6f5c]">•</div>
+            <div class="font-medium tracking-wide">259+ zadowolonych klientek</div>
+            <div class="text-[#8b6f5c]">•</div>
+            <div class="font-medium tracking-wide">Profesjonalne szkolenia</div>
+            <div class="text-[#8b6f5c]">•</div>
+            <div class="font-medium tracking-wide">Naturalne efekty</div>
+        </div>
+    </div>
+
+    <!-- O NAS -->
+    <section id="o-nas" class="max-w-screen-2xl mx-auto px-6 lg:px-12 pt-20 pb-16">
+        <div class="grid lg:grid-cols-12 gap-x-16 gap-y-14 items-center">
+            <div class="lg:col-span-7">
+                <div class="uppercase text-xs tracking-[4px] text-[#c9a9a0] mb-3 font-medium">OD 2018 • OLSZTYN</div>
+                <h2 class="heading-serif text-6xl md:text-7xl leading-none tracking-tighter mb-8">Sztuka<br>naturalnego<br>piękna.</h2>
+                
+                <div class="max-w-2xl text-[17px] leading-relaxed text-[#3f2e2a] space-y-6">
+                    <p>W sercu Olsztyna tworzymy przestrzeń, w której precyzja spotyka się z delikatnością. Doktor Brew to nie tylko studio stylizacji brwi i rzęs — to miejsce, gdzie każda klientka otrzymuje indywidualną, uważną opiekę.</p>
+                    
+                    <p>Prowadzone przez <strong>Monikę Najmowicz</strong> — specjalistkę, która z pasją doskonali naturalne piękno spojrzenia. Jesteśmy dumni z oceny <strong>5.0/5</strong> na podstawie ponad 259 opinii na Booksy. Nasze klientki wracają, bo efekty mówią same za siebie.</p>
+                </div>
+
+                <div class="flex flex-wrap gap-3 mt-8">
+                    <div class="inline-flex items-center bg-white px-5 h-11 rounded-2xl text-sm border border-[#e8d9d2]">
+                        <i class="fa-solid fa-heart text-[#c9a9a0] mr-2.5"></i> 
+                        <span class="font-medium">Najwyższa jakość produktów</span>
+                    </div>
+                    <div class="inline-flex items-center bg-white px-5 h-11 rounded-2xl text-sm border border-[#e8d9d2]">
+                        <i class="fa-solid fa-award text-[#c9a9a0] mr-2.5"></i> 
+                        <span class="font-medium">Naturalne, trwałe efekty</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monika Portrait -->
+            <div class="lg:col-span-5">
+                <div class="relative">
+                    <div class="aspect-[4/3.15] rounded-3xl overflow-hidden elegant-shadow border border-[#e8d9d2]">
+                        <img src="assets/images/real/monika.jpg" alt="Monika Najmowicz - specjalistka stylizacji brwi i rzęs w Doktor Brew" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-5 -right-5 bg-white px-8 py-4 rounded-2xl border border-[#e8d9d2] elegant-shadow max-w-[260px]">
+                        <div class="text-sm leading-tight">
+                            <span class="font-semibold text-[#2f2522]">Monika Najmowicz</span><br>
+                            <span class="text-[#8b6f5c]">Specjalistka stylizacji brwi, rzęs i makijażu permanentnego</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- USŁUGI -->
+    <section id="uslugi" class="bg-white border-y border-[#e8d9d2] py-16">
+        <div class="max-w-screen-2xl mx-auto px-6 lg:px-12">
+            <div class="flex flex-col items-center text-center mb-12">
+                <div class="text-[#c9a9a0] text-xs tracking-[4px] font-medium mb-2">PRECYZJA • INDYWIDUALNE PODEJŚCIE</div>
+                <h2 class="heading-serif text-6xl tracking-tighter">Nasze usługi</h2>
+                <p class="mt-4 max-w-md text-[#3f2e2a]/80">Wybierz kategorię, aby zobaczyć szczegóły i ceny. Rezerwacja przez Booksy.</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10" id="service-tabs">
+                <button data-tab="brwi" class="service-tab active px-7 py-2.5 text-sm rounded-3xl border border-[#c9a9a0] bg-[#c9a9a0] text-white font-medium">Brwi</button>
+                <button data-tab="rzesy" class="service-tab px-7 py-2.5 text-sm rounded-3xl border border-[#e8d9d2] hover:border-[#c9a9a0] font-medium">Rzęsy</button>
+                <button data-tab="permanent" class="service-tab px-7 py-2.5 text-sm rounded-3xl border border-[#e8d9d2] hover:border-[#c9a9a0] font-medium">Makijaż permanentny</button>
+                <button data-tab="szkolenia" class="service-tab px-7 py-2.5 text-sm rounded-3xl border border-[#e8d9d2] hover:border-[#c9a9a0] font-medium">Szkolenia</button>
+            </div>
+
+            <!-- Services Content -->
+            <div id="services-content">
+                <!-- BRWI -->
+                <div data-content="brwi" class="service-content grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <div class="premium-card bg-[#f8f4f0] border border-[#e8d9d2] rounded-3xl p-7 flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <div class="font-semibold text-xl tracking-tight">Laminacja brwi z koloryzacją</div>
+                                <div class="text-xs text-[#8b6f5c] mt-0.5">+ odżywka • 1h 30min</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-semibold text-3xl tabular-nums">180</div>
+                                <div class="text-[10px] text-[#8b6f5c] -mt-1">ZŁ</div>
+                            </div>
+                        </div>
+                        <p class="text-sm leading-relaxed text-[#3f2e2a]/90 flex-1">Zmiękcza i uelastycznia włoski, ułatwia układanie niesfornych brwi. Koloryzacja dobierana indywidualnie do typu urody. Efekt do 6 tygodni.</p>
+                        <div class="pt-5 mt-auto">
+                            <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank" 
+                               class="inline-flex items-center text-xs font-semibold tracking-widest border-b border-[#c9a9a0] hover:border-[#2f2522] pb-px transition-colors">UMÓW NA BOOKSY →</a>
+                        </div>
+                    </div>
+
+                    <div class="premium-card bg-[#f8f4f0] border border-[#e8d9d2] rounded-3xl p-7 flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <div class="font-semibold text-xl tracking-tight">Laminacja brwi bez koloryzacji</div>
+                                <div class="text-xs text-[#8b6f5c] mt-0.5">+ odżywka • 1h</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-semibold text-3xl tabular-nums">160</div>
+                                <div class="text-[10px] text-[#8b6f5c] -mt-1">ZŁ</div>
+                            </div>
+                        </div>
+                        <p class="text-sm leading-relaxed text-[#3f2e2a]/90 flex-1">Zabieg dla osób o ciemnych lub niewymagających koloryzacji włoskach. Doskonały wybór przy sztywnych, nieukładających się brwiach. Efekt utrzymuje się do 6 tygodni.</p>
+                        <div class="pt-5 mt-auto">
+                            <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank" 
+                               class="inline-flex items-center text-xs font-semibold tracking-widest border-b border-[#c9a9a0] hover:border-[#2f2522] pb-px transition-colors">UMÓW NA BOOKSY →</a>
+                        </div>
+                    </div>
+
+                    <div class="premium-card bg-[#f8f4f0] border border-[#e8d9d2] rounded-3xl p-7 flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <div class="font-semibold text-xl tracking-tight">Stylizacja brwi farbką lub henną pudrową</div>
+                                <div class="text-xs text-[#8b6f5c] mt-0.5">Regulacja nicią • 1h</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-semibold text-3xl tabular-nums">120</div>
+                                <div class="text-[10px] text-[#8b6f5c] -mt-1">ZŁ</div>
+                            </div>
+                        </div>
+                        <p class="text-sm leading-relaxed text-[#3f2e2a]/90 flex-1">Klasyczna, elegancka stylizacja z precyzyjną regulacją nicią (nitkowaniem). Idealny wybór na co dzień lub specjalne okazje. Kolor idealnie dopasowany.</p>
+                        <div class="pt-5 mt-auto">
+                            <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank" 
+                               class="inline-flex items-center text-xs font-semibold tracking-widest border-b border-[#c9a9a0] hover:border-[#2f2522] pb-px transition-colors">UMÓW NA BOOKSY →</a>
+                        </div>
+                    </div>
+
+                    <div class="premium-card bg-[#f8f4f0] border border-[#e8d9d2] rounded-3xl p-7 flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <div class="font-semibold text-xl tracking-tight">Farbka z regulacją po pigmentacji</div>
+                                <div class="text-xs text-[#8b6f5c] mt-0.5">Nitkowanie • 50min</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-semibold text-3xl tabular-nums">70</div>
+                                <div class="text-[10px] text-[#8b6f5c] -mt-1">ZŁ</div>
+                            </div>
+                        </div>
+                        <p class="text-sm leading-relaxed text-[#3f2e2a]/90 flex-1">Dedykowana usługa dla posiadaczek makijażu permanentnego wykonanego w naszym salonie. Utrzymanie świeżego efektu co ok. 2 miesiące.</p>
+                        <div class="pt-5 mt-auto">
+                            <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank" 
+                               class="inline-flex items-center text-xs font-semibold tracking-widest border-b border-[#c9a9a0] hover:border-[#2f2522] pb-px transition-colors">UMÓW NA BOOKSY →</a>
+                        </div>
+                    </div>
+
+                    <div class="premium-card bg-[#f8f4f0] border border-[#e8d9d2] rounded-3xl p-7 flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <div class="font-semibold text-xl tracking-tight">Konsultacja z indywidualną stylizacją</div>
+                                <div class="text-xs text-[#8b6f5c] mt-0.5">1h 30min</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-semibold text-3xl tabular-nums">100</div>
+                                <div class="text-[10px] text-[#8b6f5c] -mt-1">ZŁ+</div>
+                            </div>
+                        </div>
+                        <p class="text-sm leading-relaxed text-[#3f2e2a]/90 flex-1">Nie wiesz, jaki zabieg będzie dla Ciebie najlepszy? Umów konsultację — dobierzemy metodę stylizacji indywidualnie i wykonamy zabieg od razu.</p>
+                        <div class="pt-5 mt-auto">
+                            <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank" 
+                               class="inline-flex items-center text-xs font-semibold tracking-widest border-b border-[#c9a9a0] hover:border-[#2f2522] pb-px transition-colors">UMÓW NA BOOKSY →</a>
+                        </div>
+                    </div>
+
+                    <div class="premium-card bg-white border border-[#e8d9d2] rounded-3xl p-7 flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <div class="font-semibold text-xl tracking-tight">Próba uczuleniowa</div>
+                                <div class="text-xs text-[#8b6f5c] mt-0.5">Przed henną / farbką • 15min</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-semibold text-3xl tabular-nums">50</div>
+                                <div class="text-[10px] text-[#8b6f5c] -mt-1">ZŁ</div>
+                            </div>
+                        </div>
+                        <p class="text-sm leading-relaxed text-[#3f2e2a]/90 flex-1">Zalecana przed pierwszym farbowaniem henną lub farbką. Bezpieczeństwo przede wszystkim.</p>
+                        <div class="pt-5 mt-auto">
+                            <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank" 
+                               class="inline-flex items-center text-xs font-semibold tracking-widest border-b border-[#c9a9a0] hover:border-[#2f2522] pb-px transition-colors">UMÓW NA BOOKSY →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RZĘSY -->
+                <div data-content="rzesy" class="service-content hidden grid md:grid-cols-2 gap-5">
+                    <div class="premium-card bg-[#f8f4f0] border border-[#e8d9d2] rounded-3xl p-8 md:col-span-2 lg:col-span-1">
+                        <div class="uppercase text-xs tracking-[2px] text-[#c9a9a0] font-medium mb-2">NOWOŚĆ W STUDIO</div>
+                        <div class="font-semibold text-4xl tracking-tighter leading-none mb-3">Lifting &amp; Laminacja rzęs</div>
+                        <p class="text-[#3f2e2a]/90">Profesjonalny lifting i laminacja rzęs z użyciem najwyższej jakości produktów koreańskich i europejskich. Efekt uniesionych, odżywionych i pięknie podkreślonych rzęs na 6–8 tygodni.</p>
+                        
+                        <div class="my-8 h-px bg-[#e8d9d2]"></div>
+                        
+                        <div class="grid grid-cols-2 gap-x-8 text-sm">
+                            <div>
+                                <div class="text-[#8b6f5c] text-xs">CZAS TRWANIA</div>
+                                <div class="font-medium">ok. 1h 15min – 1h 30min</div>
+                            </div>
+                            <div>
+                                <div class="text-[#8b6f5c] text-xs">EFEKT</div>
+                                <div class="font-medium">Do 8 tygodni</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="premium-card bg-[#f8f4f0] border border-[#e8d9d2] rounded-3xl p-7 flex flex-col justify-between">
+                        <div>
+                            <div class="font-semibold text-xl tracking-tight mb-1">Lifting rzęs + koloryzacja</div>
+                            <div class="text-[#8b6f5c] text-sm">Z odżywką i botoksem rzęs (opcjonalnie)</div>
+                        </div>
+                        <div class="pt-4">
+                            <div class="text-sm">Aktualny cennik i terminy</div>
+                            <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank" 
+                               class="mt-2 inline-block text-sm font-semibold tracking-widest border-b border-[#c9a9a0]">SPRAWDŹ NA BOOKSY →</a>
+                        </div>
+                    </div>
+                    
+                    <div class="premium-card bg-[#f8f4f0] border border-[#e8d9d2] rounded-3xl p-7 flex flex-col justify-between">
+                        <div>
+                            <div class="font-semibold text-xl tracking-tight mb-1">Laminacja rzęs</div>
+                            <div class="text-[#8b6f5c] text-sm">Z koloryzacją i regeneracją</div>
+                        </div>
+                        <div class="pt-4">
+                            <div class="text-sm">Pakiety brwi + rzęsy</div>
+                            <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank" 
+                               class="mt-2 inline-block text-sm font-semibold tracking-widest border-b border-[#c9a9a0]">ZAREZERWUJ KONSULTACJĘ →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PERMANENTNY -->
+                <div data-content="permanent" class="service-content hidden grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <div class="premium-card bg-[#f8f4f0] border border-[#e8d9d2] rounded-3xl p-7 md:col-span-2 lg:col-span-3">
+                        <div class="grid md:grid-cols-2 gap-x-10 items-center">
+                            <div>
+                                <div class="font-semibold text-[27px] leading-none tracking-tighter">Makijaż permanentny brwi</div>
+                                <p class="mt-4 text-[#3f2e2a]/90">Brwi to rama dla oczu. Dobrze dobrany kształt i kolor potrafią całkowicie odmienić rysy twarzy. Specjalizujemy się w naturalnych, delikatnych efektach — nigdy przesadzonych.</p>
+                                <div class="mt-5 text-sm">Czas trwania: 3 godziny • Metoda dobierana indywidualnie</div>
+                            </div>
+                            <div class="mt-6 md:mt-0 md:border-l md:border-[#e8d9d2] md:pl-9">
+                                <div class="text-sm mb-1 text-[#8b6f5c]">PIERWSZA WIZYTA</div>
+                                <div class="flex items-baseline gap-x-1">
+                                    <span class="text-6xl font-semibold tabular-nums tracking-tighter">1000</span>
+                                    <span class="text-xl font-medium text-[#8b6f5c]">zł</span>
+                                </div>
+                                
+                                <div class="mt-6 space-y-3 text-sm">
+                                    <div class="flex justify-between border-b border-[#e8d9d2] pb-1.5"><span>Odświeżenie (do 1 roku)</span> <span class="font-medium tabular-nums">700 zł</span></div>
+                                    <div class="flex justify-between border-b border-[#e8d9d2] pb-1.5"><span>Odświeżenie (1–2 lata)</span> <span class="font-medium tabular-nums">800 zł</span></div>
+                                    <div class="flex justify-between"><span>Dopigmentowanie (do 6 tygodni)</span> <span class="font-medium tabular-nums">200 zł</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="premium-card bg-white border border-[#e8d9d2] rounded-3xl p-7">
+                        <div class="text-[#c9a9a0] text-xs tracking-widest mb-1">KONSULTACJA</div>
+                        <div class="font-semibold">Konsultacja przed makijażem permanentnym</div>
+                        <div class="text-4xl font-semibold tabular-nums mt-4">150 <span class="text-base font-medium text-[#8b6f5c]">zł</span></div>
+                        <div class="text-xs text-[#8b6f5c] mt-0.5">30 minut</div>
+                        <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank" class="mt-6 block text-xs font-semibold tracking-[1.5px] border-b pb-px border-[#c9a9a0] w-fit">UMÓW KONSULTACJĘ →</a>
+                    </div>
+                </div>
+
+                <!-- SZKOLENIA -->
+                <div data-content="szkolenia" class="service-content hidden">
+                    <div class="bg-[#f8f4f0] border border-[#e8d9d2] rounded-3xl p-9 md:p-12">
+                        <div class="max-w-3xl">
+                            <div class="uppercase tracking-[3px] text-xs text-[#c9a9a0] mb-1">DLA STYLISTEK</div>
+                            <h3 class="heading-serif text-5xl tracking-tighter">Profesjonalne szkolenia</h3>
+                            <p class="mt-5 text-lg text-[#3f2e2a]/90">Przekazujemy wiedzę i doświadczenie. Szkolenia indywidualne oraz grupowe z laminacji brwi, stylizacji henną, liftingu rzęs oraz makijażu permanentnego.</p>
+                            
+                            <div class="mt-9 flex flex-wrap gap-4">
+                                <a href="https://www.instagram.com/doktor.brew/" target="_blank" 
+                                   class="inline-flex items-center px-6 py-3 border border-[#c9a9a0] rounded-2xl text-sm font-medium hover:bg-white transition">NAPISZ NA INSTAGRAMIE</a>
+                                <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank" 
+                                   class="inline-flex items-center px-6 py-3 bg-[#2f2522] text-white rounded-2xl text-sm font-medium">ZAPYTAJ O TERMINY</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNIKI + WIDEO -->
+    <section id="techniki" class="max-w-screen-2xl mx-auto px-6 lg:px-12 py-20">
+        <div class="text-center mb-14">
+            <div class="text-xs text-[#c9a9a0] tracking-[4px] font-medium">NASZE SPECJALIZACJE</div>
+            <h2 class="heading-serif text-6xl tracking-tighter mt-1">Techniki, którym ufamy</h2>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-3xl p-8 border border-[#e8d9d2]">
+                    <div class="uppercase tracking-widest text-xs text-[#c9a9a0] mb-2">PODSTAWA NASZEJ PRACY</div>
+                    <h3 class="font-semibold text-3xl tracking-tighter">Nitkowanie (regulacja nicią)</h3>
+                    <p class="mt-4 text-[#3f2e2a]/90">Najprecyzyjniejsza metoda kształtowania brwi. Pozwala usunąć pojedyncze włoski (nawet najkrótsze) bez podrażnienia skóry. Stosujemy ją przy stylizacji, po makijażu permanentnym i przy korekcie kształtu.</p>
+                </div>
+
+                <div class="bg-white rounded-3xl p-8 border border-[#e8d9d2]">
+                    <div class="uppercase tracking-widest text-xs text-[#c9a9a0] mb-2">LAMINACJA I LIFTING</div>
+                    <h3 class="font-semibold text-3xl tracking-tighter">Laminacja brwi i lifting rzęs</h3>
+                    <p class="mt-4 text-[#3f2e2a]/90">Nowoczesne zabiegi, które zmiękczają, unoszą i utrwalają włoski. Efekt utrzymuje się do 6–8 tygodni. Stosujemy najwyższej jakości produkty dobrane indywidualnie do potrzeb klientki.</p>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- ULUBIONE EFEKTY (user's top picks - placed first in main gallery below) -->
+
+    <!-- GALERIA -->
+    <section id="galeria" class="bg-white border-y border-[#e8d9d2] py-16">
+        <div class="max-w-screen-2xl mx-auto px-6 lg:px-12">
+            <div class="flex items-end justify-between mb-9">
+                <div>
+                    <div class="text-xs uppercase tracking-[3px] text-[#c9a9a0]">ZOBACZ WSZYSTKIE EFEKTY</div>
+                    <h2 class="heading-serif text-6xl tracking-tighter">Galeria</h2>
+                </div>
+            </div>
+
+            <div id="gallery-grid" class="masonry-grid">
+                <!-- Ordered by the numbers the user prepended in the real/ directory -->
+                <div class="gallery-item"><img src="assets/images/real/1result-good-01.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 1"></div>
+                <div class="gallery-item"><img src="assets/images/real/2result-good-03.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 2"></div>
+                <div class="gallery-item"><img src="assets/images/real/3result-good-02.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 3"></div>
+                <div class="gallery-item"><img src="assets/images/real/4result-good-06.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 4"></div>
+                <div class="gallery-item"><img src="assets/images/real/5result-good-08.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 5"></div>
+                <div class="gallery-item"><img src="assets/images/real/6result-good-07.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 6"></div>
+                <div class="gallery-item"><img src="assets/images/real/7result-good-10.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 7"></div>
+                <div class="gallery-item"><img src="assets/images/real/8result-good-09.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 8"></div>
+                <div class="gallery-item"><img src="assets/images/real/9.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 9"></div>
+
+                <!-- Remaining images hidden behind Load More (from booksy + good) -->
+                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-02.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Szczegół brwi po stylizacji"></div>
+                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-03.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Brwi po hennie pudrowej"></div>
+                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-04.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Ekstremalne zbliżenie brwi i rzęs"></div>
+                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-05.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Zbliżenie oka po liftingu"></div>
+                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-06.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Brwi po laminacji"></div>
+                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-07.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Portret z uniesionymi brwiami"></div>
+                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-08.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Zbliżenie brwi po zabiegu"></div>
+                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-09.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Brwi z wyraźnym kształtem"></div>
+                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-10.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Zbliżenie oka i brwi"></div>
+                <div class="gallery-item hidden-more"><img src="assets/images/real/result-good-05.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Klientka z pięknymi brwiami"></div>
+            </div>
+
+            <div class="flex justify-center mt-8">
+                <button id="load-more-btn"
+                        class="px-8 py-3 rounded-full border border-[#c9a9a0] hover:bg-[#c9a9a0] hover:text-white transition text-sm font-medium tracking-wide">
+                    Pokaż więcej zdjęć
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- OPINIE -->
+    <section id="opinie" class="max-w-screen-2xl mx-auto px-6 lg:px-12 py-20">
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center gap-2 bg-white border border-[#e8d9d2] rounded-full px-5 py-1 mb-3">
+                <span class="font-semibold tabular-nums text-xl">5.0</span>
+                <span class="text-xs text-[#8b6f5c]">259 OPINII NA BOOKSY</span>
+            </div>
+            <h2 class="heading-serif text-6xl tracking-tighter">Co mówią nasze klientki</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div class="bg-white p-8 rounded-3xl border border-[#e8d9d2]">
+                <div class="flex gap-1 text-[#c9a9a0] mb-5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="italic leading-relaxed">„Kocham te miejsce 🩷🩷🩷”</p>
+                <div class="mt-6 text-sm"><span class="font-medium">Martyna</span> <span class="text-[#8b6f5c]">• Laminacja brwi</span></div>
+            </div>
+            
+            <div class="bg-white p-8 rounded-3xl border border-[#e8d9d2]">
+                <div class="flex gap-1 text-[#c9a9a0] mb-5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="italic leading-relaxed">„Piękne brewki! Sympatyczna pani Monika — polecam jak najbardziej :)”</p>
+                <div class="mt-6 text-sm"><span class="font-medium">Paulina</span> <span class="text-[#8b6f5c]">• Stylizacja farbką</span></div>
+            </div>
+            
+            <div class="bg-white p-8 rounded-3xl border border-[#e8d9d2]">
+                <div class="flex gap-1 text-[#c9a9a0] mb-5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="italic leading-relaxed">„Jak zawsze wszystko idealnie 🩷”</p>
+                <div class="mt-6 text-sm"><span class="font-medium">Julitta</span> <span class="text-[#8b6f5c]">• Laminacja brwi</span></div>
+            </div>
+            
+            <div class="bg-white p-8 rounded-3xl border border-[#e8d9d2]">
+                <div class="flex gap-1 text-[#c9a9a0] mb-5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="italic leading-relaxed">„Zabieg w bardzo przyjemnej atmosferze. Pani Monika — pełen profesjonalizm!”</p>
+                <div class="mt-6 text-sm"><span class="font-medium">Magdalena</span> <span class="text-[#8b6f5c]">• Odświeżenie makijażu permanentnego</span></div>
+            </div>
+            
+            <div class="bg-white p-8 rounded-3xl border border-[#e8d9d2]">
+                <div class="flex gap-1 text-[#c9a9a0] mb-5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="italic leading-relaxed">„Pani Monika wszystko świetnie wyjaśniła, a sam zabieg dzięki przemiłej atmosferze przebieg szybko i bezboleśnie ❤️ Polecam z całego serducha!”</p>
+                <div class="mt-6 text-sm"><span class="font-medium">Martyna</span> <span class="text-[#8b6f5c]">• Makijaż permanentny brwi</span></div>
+            </div>
+            
+            <div class="bg-white p-8 rounded-3xl border border-[#e8d9d2]">
+                <div class="flex gap-1 text-[#c9a9a0] mb-5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="italic leading-relaxed">„Zdecydowanie polecam :) Najlepsze brwi wyczarowała przesympatyczna Pani Monika ❤️ Top miejsce!”</p>
+                <div class="mt-6 text-sm"><span class="font-medium">Katarzyna</span> <span class="text-[#8b6f5c]">• Stylizacja brwi</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STUDIO + KONTAKT -->
+    <section id="kontakt" class="max-w-screen-2xl mx-auto px-6 lg:px-12 pb-16">
+        <div class="grid lg:grid-cols-12 gap-x-8 gap-y-12">
+            <!-- Studio photo + info -->
+            <div class="lg:col-span-7">
+                <div class="relative rounded-3xl overflow-hidden aspect-[16/9.5] elegant-shadow border border-[#e8d9d2]">
+                    <img src="assets/images/real/interior-02.jpg" alt="Eleganckie wnętrze studia Doktor Brew przy ul. Wyzwolenia w Olsztynie" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/15 to-black/40"></div>
+                    <div class="absolute bottom-0 left-0 p-9 text-white">
+                        <div class="text-xs tracking-[3px] opacity-75">PRZYJMUJEMY W</div>
+                        <div class="text-5xl font-semibold tracking-tighter heading-serif mt-1">Olsztynie</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 space-y-8">
+                <div>
+                    <div class="uppercase text-xs tracking-[3px] text-[#c9a9a0]">ADRES</div>
+                    <div class="text-3xl leading-tight tracking-tighter font-semibold mt-1">ul. Wyzwolenia 18/u2<br>10-106 Olsztyn</div>
+                </div>
+                
+                <div class="space-y-4 text-base">
+                    <a href="tel:+48792910809" class="flex items-center gap-x-4 group">
+                        <div class="w-9 h-9 rounded-2xl border border-[#e8d9d2] flex items-center justify-center group-hover:border-[#c9a9a0]"><i class="fa-solid fa-phone"></i></div>
+                        <div>
+                            <div class="text-xs text-[#8b6f5c]">TELEFON</div>
+                            <div class="font-medium group-hover:text-[#c9a9a0] transition">+48 792 910 809</div>
+                        </div>
+                    </a>
+                    
+                    <a href="mailto:doktor.brew.olsztyn@gmail.com" class="flex items-center gap-x-4 group">
+                        <div class="w-9 h-9 rounded-2xl border border-[#e8d9d2] flex items-center justify-center group-hover:border-[#c9a9a0]"><i class="fa-solid fa-envelope"></i></div>
+                        <div>
+                            <div class="text-xs text-[#8b6f5c]">EMAIL</div>
+                            <div class="font-medium group-hover:text-[#c9a9a0] transition">doktor.brew.olsztyn@gmail.com</div>
+                        </div>
+                    </a>
+                </div>
+
+                <div>
+                    <div class="uppercase text-xs tracking-[3px] text-[#c9a9a0] mb-3">ŚLEDŹ NAS</div>
+                    <div class="flex gap-3">
+                        <a href="https://www.instagram.com/doktor.brew/" target="_blank" class="flex-1 flex items-center justify-center gap-x-2 bg-white border border-[#e8d9d2] hover:border-[#c9a9a0] transition-colors py-[13px] rounded-2xl text-sm font-medium">
+                            <i class="fa-brands fa-instagram"></i> <span>Instagram</span>
+                        </a>
+                        <a href="https://www.facebook.com/DoktorBrew/" target="_blank" class="flex-1 flex items-center justify-center gap-x-2 bg-white border border-[#e8d9d2] hover:border-[#c9a9a0] transition-colors py-[13px] rounded-2xl text-sm font-medium">
+                            <i class="fa-brands fa-facebook"></i> <span>Facebook</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map -->
+        <div class="mt-8 rounded-3xl overflow-hidden border border-[#e8d9d2] elegant-shadow">
+            <iframe src="https://www.google.com/maps?q=Wyzwolenia+18,+Olsztyn&output=embed" width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Doktor Brew – ul. Wyzwolenia 18/u2, Olsztyn"></iframe>
+        </div>
+
+        <div class="text-center mt-6 text-xs text-[#8b6f5c]">Otwieramy wyłącznie w poniedziałki, środy i piątki — tylko po wcześniejszej rezerwacji</div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <div class="border-t border-[#e8d9d2] bg-[#2f2522] text-white py-12">
+        <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 text-center">
+            <div class="max-w-lg mx-auto">
+                <div class="heading-serif text-5xl tracking-tighter">Gotowa na piękne brwi?</div>
+                <p class="mt-3 text-white/70">Zarezerwuj termin online — najwygodniej przez Booksy. Czekamy na Ciebie.</p>
+                
+                <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank"
+                   class="mt-8 inline-flex beauty-btn items-center gap-x-3 bg-white text-[#2f2522] px-12 py-4 rounded-2xl font-semibold text-sm tracking-[1.5px]">
+                    ZAREZERWUJ WIZYTĘ NA BOOKSY
+                    <i class="fa-solid fa-external-link-alt ml-1"></i>
+                </a>
+                
+                <div class="mt-5 text-xs text-white/50">Lub zadzwoń: +48 792 910 809</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#2f2522] text-white/60 text-xs py-9 border-t border-white/10">
+        <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-y-2 text-center md:text-left">
+            <div>© 2026 Doktor Brew • Olsztyn. Wszelkie prawa zastrzeżone.</div>
+            <div class="flex gap-x-4">
+                <span>Polityka prywatności</span>
+                <span>•</span>
+                <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" class="hover:text-white transition">Rezerwacje</a>
+            </div>
+            <div>Stworzone z ❤️ dla naturalnego piękna</div>
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightbox" class="hidden fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4 md:p-8" onclick="closeLightbox()">
+        <div class="max-w-5xl w-full relative" onclick="event.stopImmediatePropagation()">
+            <button onclick="closeLightbox()" class="absolute -top-4 -right-4 md:-top-3 md:-right-3 w-11 h-11 flex items-center justify-center text-white/70 hover:text-white z-10">
+                <i class="fa-solid fa-times text-3xl"></i>
+            </button>
+            <img id="lightbox-image" class="w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl" alt="">
+            <div id="lightbox-caption" class="text-center text-white/70 text-sm mt-4 tracking-wide"></div>
+        </div>
+    </div>
+
+    <script>
+        // Tailwind script configuration
+        function initTailwind() {
+            document.documentElement.style.setProperty('--accent', '#c9a9a0');
+        }
+        
+        // Mobile menu
+        function initMobileMenu() {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+                const icon = btn.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+            
+            // Close on link click
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                    btn.querySelector('i').classList.add('fa-bars');
+                    btn.querySelector('i').classList.remove('fa-times');
+                });
+            });
+        }
+        
+        // Navbar scroll effect
+        function initNavbar() {
+            const nav = document.getElementById('nav');
+            let lastScroll = 0;
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 80) {
+                    nav.classList.add('nav-scrolled');
+                } else {
+                    nav.classList.remove('nav-scrolled');
+                }
+            });
+        }
+        
+        // Service tabs
+        function initServiceTabs() {
+            const tabs = document.querySelectorAll('#service-tabs button');
+            const contents = document.querySelectorAll('.service-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const target = tab.dataset.tab;
+                    
+                    // Update active tab styles
+                    tabs.forEach(t => t.classList.remove('active', 'bg-[#c9a9a0]', 'text-white', 'border-[#c9a9a0]'));
+                    tabs.forEach(t => t.classList.add('border-[#e8d9d2]'));
+                    
+                    tab.classList.add('active', 'bg-[#c9a9a0]', 'text-white', 'border-[#c9a9a0]');
+                    tab.classList.remove('border-[#e8d9d2]');
+                    
+                    // Show correct content
+                    contents.forEach(c => c.classList.add('hidden'));
+                    const activeContent = document.querySelector(`[data-content="${target}"]`);
+                    if (activeContent) activeContent.classList.remove('hidden');
+                });
+            });
+        }
+        
+        // Gallery filters + lightbox
+        let currentFilter = 'all';
+        
+        function initGallery() {
+            const filters = document.querySelectorAll('.gallery-filter');
+            const items = document.querySelectorAll('#gallery-grid .gallery-item');
+            
+            filters.forEach(filter => {
+                filter.addEventListener('click', () => {
+                    const filterType = filter.dataset.filter;
+                    currentFilter = filterType;
+                    
+                    // Update active button
+                    filters.forEach(f => f.classList.remove('active', 'bg-[#2f2522]', 'text-white', 'border-[#2f2522]'));
+                    filters.forEach(f => f.classList.add('border-[#e8d9d2]'));
+                    filter.classList.add('active', 'bg-[#2f2522]', 'text-white', 'border-[#2f2522]');
+                    filter.classList.remove('border-[#e8d9d2]');
+                    
+                    // Filter items
+                    items.forEach(item => {
+                        if (filterType === 'all') {
+                            item.style.display = '';
+                        } else {
+                            if (item.dataset.category === filterType) {
+                                item.style.display = '';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+            
+            // Lightbox on gallery item click
+            items.forEach(item => {
+                item.addEventListener('click', () => {
+                    const img = item.querySelector('img');
+                    const caption = item.querySelector('div')?.textContent || '';
+                    
+                    openLightbox(img.src, caption);
+                });
+            });
+        }
+        
+        function openLightbox(src, caption) {
+            const modal = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-image');
+            const cap = document.getElementById('lightbox-caption');
+            
+            img.src = src;
+            cap.textContent = caption;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+        
+        // Keyboard support for lightbox
+        function initLightboxKeyboard() {
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    const modal = document.getElementById('lightbox');
+                    if (!modal.classList.contains('hidden')) {
+                        closeLightbox();
+                    }
+                }
+            });
+        }
+        
+        // Smooth scroll for anchor links
+        function initSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        e.preventDefault();
+                        const offset = 80;
+                        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+                        
+                        window.scrollTo({ top, behavior: 'smooth' });
+                        
+                        // Close mobile menu if open
+                        const menu = document.getElementById('mobile-menu');
+                        if (!menu.classList.contains('hidden')) {
+                            menu.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+        }
+        
+        // Floating booking hint (subtle)
+        function initFloatingCTA() {
+            // Already have strong CTAs everywhere — this is optional polish
+            // Could add scroll-triggered mini bar if desired
+        }
+        
+        // Initialize everything
+        function initializeWebsite() {
+            initTailwind();
+            initMobileMenu();
+            initNavbar();
+            initServiceTabs();
+            initGallery();
+            initLightboxKeyboard();
+            initSmoothScroll();
+            initFloatingCTA();
+            
+            // Show Brwi tab by default (already set in HTML)
+            // Pre-select first tab correctly
+            const firstTab = document.querySelector('#service-tabs button[data-tab="brwi"]');
+            if (firstTab) {
+                // Already styled in HTML as active
+            }
+            
+            // Accessibility: close lightbox on backdrop click is already set
+            console.log('%c[Doktor Brew] Stunning website initialized successfully.', 'color:#c9a9a0');
+        }
+        
+        // Boot
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeWebsite);
+        } else {
+            initializeWebsite();
+        }
+        
+        // Bonus: Easter egg — konfetti on logo click (subtle beauty touch)
+        setTimeout(() => {
+            const logo = document.querySelector('nav .flex.items-center');
+            if (logo) {
+                logo.style.cursor = 'pointer';
+                logo.addEventListener('click', () => {
+                    logo.style.transform = 'scale(0.96)';
+                    setTimeout(() => logo.style.transform = '', 180);
+                });
+            }
+        }, 1200);
+
+        // Load More for Gallery
+        const loadMoreBtn = document.getElementById('load-more-btn');
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', () => {
+                document.querySelectorAll('.hidden-more').forEach(el => {
+                    el.style.display = 'block';
+                    el.classList.remove('hidden-more');
+                });
+                loadMoreBtn.style.display = 'none';
+                requestAnimationFrame(applyMasonryLayout);
+            });
+        }
+
+        function applyMasonryLayout() {
+            const grid = document.getElementById('gallery-grid');
+            if (!grid) return;
+
+            const styles = window.getComputedStyle(grid);
+            const rowHeight = parseFloat(styles.getPropertyValue('grid-auto-rows'));
+            const rowGap = parseFloat(styles.getPropertyValue('row-gap'));
+
+            grid.querySelectorAll('.gallery-item').forEach(item => {
+                item.style.gridRowEnd = '';
+                if (item.offsetParent === null) return;
+
+                const image = item.querySelector('img');
+                const contentHeight = image ? image.getBoundingClientRect().height : item.getBoundingClientRect().height;
+                const rowSpan = Math.ceil((contentHeight + rowGap) / (rowHeight + rowGap));
+                item.style.gridRowEnd = `span ${rowSpan}`;
+            });
+        }
+
+        window.addEventListener('load', applyMasonryLayout);
+
+        let galleryResizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(galleryResizeTimer);
+            galleryResizeTimer = setTimeout(applyMasonryLayout, 150);
+        });
+    </script>
+</body>
+</html>
