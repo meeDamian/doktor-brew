@@ -48,20 +48,18 @@
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Monday",
-          "description": "Wyłącznie po wcześniejszej rezerwacji"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Wednesday",
-          "description": "Wyłącznie po wcześniejszej rezerwacji"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Friday",
-          "description": "Wyłącznie po wcześniejszej rezerwacji"
+          "dayOfWeek": ["Monday", "Wednesday", "Friday"],
+          "description": "Tylko po wcześniejszej rezerwacji (by appointment only)"
         }
       ],
+      "availableService": {
+        "@type": "Service",
+        "name": "Stylizacja brwi i rzęs",
+        "provider": {
+          "@type": "HealthAndBeautyBusiness",
+          "name": "Doktor Brew"
+        }
+      },
       "sameAs": [
         "https://www.instagram.com/doktor.brew/",
         "https://www.facebook.com/DoktorBrew/",
@@ -253,21 +251,6 @@
             display: none;
         }
 
-        /* Micro utilities for DRY (replaces repeated container + card patterns) */
-        .site-container {
-            max-width: 1536px;
-            margin-left: auto;
-            margin-right: auto;
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-        }
-        @media (min-width: 1024px) {
-            .site-container {
-                padding-left: 3rem;
-                padding-right: 3rem;
-            }
-        }
-
         /* Global focus styles (a11y - keyboard users) */
         :focus-visible {
             outline: 2px solid var(--rose);
@@ -311,7 +294,7 @@
                 <div class="hidden md:flex items-center gap-x-3">
                     <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank" rel="noopener noreferrer"
                        class="px-6 py-2.5 rounded-full border border-[#c9a9a0] text-sm font-medium tracking-wide hover:bg-[#c9a9a0] hover:text-white transition-all flex items-center gap-x-2">
-                        <i class="fa-solid fa-calendar-check"></i>
+                        <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
                         <span>Booksy</span>
                     </a>
                     <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank" rel="noopener noreferrer"
@@ -342,7 +325,7 @@
                 <div class="pt-4 flex flex-col gap-3 border-t border-[#e8d9d2]">
                     <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank"
                        class="flex items-center justify-center gap-x-2 py-3.5 rounded-2xl border border-[#c9a9a0] text-base font-medium">
-                        <i class="fa-solid fa-calendar-check"></i>
+                        <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
                         <span>Zarezerwuj na Booksy</span>
                     </a>
                     <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank"
@@ -358,7 +341,7 @@
     <header class="relative min-h-[100dvh] flex items-center justify-center pt-20 overflow-hidden">
         <div class="absolute inset-0 bg-[#2f2522]">
             <img src="assets/images/real/interior-01.jpg" alt="Wnętrze studia Doktor Brew przy ul. Wyzwolenia w Olsztynie" 
-                 width="2340" height="1559" fetchpriority="high"
+                 width="2340" height="1559"
                  class="absolute inset-0 w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-b from-black/35 via-black/25 to-black/60"></div>
         </div>
@@ -474,7 +457,7 @@
 
             <!-- Tabs -->
             <div class="flex flex-wrap justify-center gap-2 mb-10" id="service-tabs">
-                <button type="button" data-tab="brwi" class="service-tab active px-7 py-2.5 text-sm rounded-3xl border border-[#c9a9a0] bg-[#c9a9a0] text-white font-medium">Brwi</button>
+                <button type="button" data-tab="brwi" class="service-tab active px-7 py-2.5 text-sm rounded-3xl border border-[#c9a9a0] text-white font-medium">Brwi</button>
                 <button type="button" data-tab="rzesy" class="service-tab px-7 py-2.5 text-sm rounded-3xl border border-[#e8d9d2] hover:border-[#c9a9a0] font-medium">Rzęsy</button>
                 <button type="button" data-tab="permanent" class="service-tab px-7 py-2.5 text-sm rounded-3xl border border-[#e8d9d2] hover:border-[#c9a9a0] font-medium">Makijaż permanentny</button>
                 <button type="button" data-tab="szkolenia" class="service-tab px-7 py-2.5 text-sm rounded-3xl border border-[#e8d9d2] hover:border-[#c9a9a0] font-medium">Szkolenia</button>
@@ -682,7 +665,7 @@
                             <p class="mt-5 text-lg text-[#3f2e2a]/90">Przekazujemy wiedzę i doświadczenie. Szkolenia indywidualne oraz grupowe z laminacji brwi, stylizacji henną, liftingu rzęs oraz makijażu permanentnego.</p>
                             
                             <div class="mt-9 flex flex-wrap gap-4">
-                                <a href="https://www.instagram.com/doktor.brew/" target="_blank" 
+                                <a href="https://www.instagram.com/doktor.brew/" target="_blank" rel="noopener noreferrer"
                                    class="inline-flex items-center px-6 py-3 border border-[#c9a9a0] rounded-2xl text-sm font-medium hover:bg-white transition">NAPISZ NA INSTAGRAMIE</a>
                                 <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank" 
                                    class="inline-flex items-center px-6 py-3 bg-[#2f2522] text-white rounded-2xl text-sm font-medium">ZAPYTAJ O TERMINY</a>
@@ -886,7 +869,7 @@
                 <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank" rel="noopener noreferrer"
                    class="mt-8 inline-flex beauty-btn items-center gap-x-3 bg-white text-[#2f2522] px-12 py-4 rounded-2xl font-semibold text-sm tracking-[1.5px]">
                     ZAREZERWUJ WIZYTĘ NA BOOKSY
-                    <i class="fa-solid fa-external-link-alt ml-1"></i>
+                    <i class="fa-solid fa-external-link-alt ml-1" aria-hidden="true"></i>
                 </a>
                 
                 <div class="mt-5 text-xs text-white/50">Lub zadzwoń: +48 792 910 809</div>
@@ -919,13 +902,18 @@
     </div>
 
     <script>
-        // === CENTRAL CONSTANTS (single source of truth for maintenance) ===
+        // === CENTRAL CONSTANTS ===
+        // BOOKING_URL is the single source of truth for the external booking link.
+        // wireBookingLinks() (called on init) updates all matching anchors at runtime.
+        // Note: In a pure static site we cannot fully eliminate the literal URL strings
+        // from the HTML source without a build/templating step. Keep the values in sync
+        // when changing the booking URL in the future.
         const BOOKING_URL = 'https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn';
         let lastLightboxTrigger = null;
 
         // Tailwind script configuration
         function initTailwind() {
-            document.documentElement.style.setProperty('--accent', 'var(--rose)');
+            // No-op kept for potential future Tailwind script config
         }
         
         // Mobile menu
@@ -941,12 +929,15 @@
                 icon.classList.toggle('fa-times');
             });
             
-            // Close on link click
-            document.querySelectorAll('.mobile-link').forEach(link => {
+            // Close on any link inside the mobile menu (covers nav links + booking CTAs)
+            menu.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     menu.classList.add('hidden');
-                    btn.querySelector('i').classList.add('fa-bars');
-                    btn.querySelector('i').classList.remove('fa-times');
+                    const icon = btn.querySelector('i');
+                    if (icon) {
+                        icon.classList.add('fa-bars');
+                        icon.classList.remove('fa-times');
+                    }
                 });
             });
         }
@@ -974,7 +965,7 @@
                     const target = tab.dataset.tab;
                     
                     // Update active tab styles (colors now driven by .service-tab.active CSS rule + CSS vars)
-                    tabs.forEach(t => t.classList.remove('active', 'text-white', 'border-[#c9a9a0]'));
+                    tabs.forEach(t => t.classList.remove('active', 'text-white', 'border-[#c9a9a0]', 'bg-[#c9a9a0]'));
                     tabs.forEach(t => t.classList.add('border-[#e8d9d2]'));
                     
                     tab.classList.add('active', 'text-white', 'border-[#c9a9a0]');
@@ -997,8 +988,9 @@
                 item.setAttribute('role', 'button');
                 item.setAttribute('tabindex', '0');
                 const img = item.querySelector('img');
-                if (img && img.alt) {
-                    item.setAttribute('aria-label', 'Powiększ zdjęcie: ' + img.alt);
+                if (img) {
+                    const label = img.alt ? 'Powiększ zdjęcie: ' + img.alt : 'Powiększ zdjęcie';
+                    item.setAttribute('aria-label', label);
                 }
 
                 const openThis = () => {
@@ -1019,11 +1011,13 @@
         function openLightbox(src, caption) {
             lastLightboxTrigger = document.activeElement;
             const modal = document.getElementById('lightbox');
+            if (!modal) return;
+
             const img = document.getElementById('lightbox-image');
             const cap = document.getElementById('lightbox-caption');
             
-            img.src = src;
-            cap.textContent = caption;
+            if (img) img.src = src;
+            if (cap) cap.textContent = caption;
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             document.body.style.overflow = 'hidden';
@@ -1034,6 +1028,8 @@
         
         function closeLightbox() {
             const modal = document.getElementById('lightbox');
+            if (!modal) return;
+
             modal.classList.remove('flex');
             modal.classList.add('hidden');
             document.body.style.overflow = '';
@@ -1055,7 +1051,9 @@
                     return;
                 }
 
-                // Minimal focus trap for Tab / Shift+Tab inside the dialog
+                // Minimal focus trap for Tab / Shift+Tab inside the dialog.
+                // Sufficient for the current lightbox (single close button). If more
+                // controls are added later, consider a more robust inert + roving pattern.
                 if (e.key === 'Tab') {
                     const focusables = modal.querySelectorAll(
                         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -1122,6 +1120,8 @@
         function wireBookingLinks() {
             document.querySelectorAll('a[href*="booksy.com"]').forEach(a => {
                 a.href = BOOKING_URL;
+                a.target = '_blank';
+                a.rel = 'noopener noreferrer';
             });
         }
         
@@ -1162,8 +1162,13 @@
             if (!grid) return;
 
             const styles = window.getComputedStyle(grid);
-            const rowHeight = parseFloat(styles.getPropertyValue('grid-auto-rows'));
-            const rowGap = parseFloat(styles.getPropertyValue('row-gap'));
+            let rowHeight = parseFloat(styles.getPropertyValue('grid-auto-rows'));
+            let rowGap = parseFloat(styles.getPropertyValue('row-gap'));
+
+            if (isNaN(rowHeight) || isNaN(rowGap)) {
+                rowHeight = 8;
+                rowGap = 16;
+            }
 
             grid.querySelectorAll('.gallery-item').forEach(item => {
                 item.style.gridRowEnd = '';
