@@ -48,20 +48,18 @@
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Monday",
-          "description": "Wyłącznie po wcześniejszej rezerwacji"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Wednesday",
-          "description": "Wyłącznie po wcześniejszej rezerwacji"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Friday",
-          "description": "Wyłącznie po wcześniejszej rezerwacji"
+          "dayOfWeek": ["Monday", "Wednesday", "Friday"],
+          "description": "Tylko po wcześniejszej rezerwacji (by appointment only)"
         }
       ],
+      "availableService": {
+        "@type": "Service",
+        "name": "Stylizacja brwi i rzęs",
+        "provider": {
+          "@type": "HealthAndBeautyBusiness",
+          "name": "Doktor Brew"
+        }
+      },
       "sameAs": [
         "https://www.instagram.com/doktor.brew/",
         "https://www.facebook.com/DoktorBrew/",
@@ -80,11 +78,23 @@
     <meta name="theme-color" content="#f8f4f0">
     <meta name="msapplication-TileColor" content="#f8f4f0">
 
+    <!-- Resource hints for CDNs + critical assets (perf) -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+    <!-- Preload LCP hero image -->
+    <link rel="preload" as="image" href="assets/images/real/interior-01.jpg" fetchpriority="high">
+
+    <!-- Google Fonts (moved out of @import for better parallelism + caching) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&amp;family=Inter:wght@300;400;500&amp;display=swap">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&amp;family=Inter:wght@300;400;500&amp;family=Playfair+Display+SC:wght@400&amp;display=swap');
-        
         :root {
             --cream: #f8f4f0;
             --blush: #e8d9d2;
@@ -115,7 +125,7 @@
             height: 1px;
             bottom: -2px;
             left: 0;
-            background-color: #c9a9a0;
+            background-color: var(--rose);
             transition: width 0.3s ease;
         }
         
@@ -137,9 +147,9 @@
         }
         
         .service-tab.active {
-            background-color: #c9a9a0;
+            background-color: var(--rose);
             color: white;
-            border-color: #c9a9a0;
+            border-color: var(--rose);
         }
 
         .gallery-item {
@@ -159,22 +169,6 @@
         
         .gallery-item:hover img {
             transform: scale(1.08);
-        }
-
-        .section-heading {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-heading:after {
-            content: '';
-            position: absolute;
-            bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 48px;
-            height: 1px;
-            background: linear-gradient(to right, transparent, #c9a9a0, transparent);
         }
 
         .beauty-btn {
@@ -207,33 +201,10 @@
             box-shadow: 0 10px 15px -3px rgb(47 37 34 / 0.08), 0 4px 6px -4px rgb(47 37 34 / 0.08);
         }
 
-        .soft-bg {
-            background-color: #f8f4f0;
-        }
-
         .nav-scrolled {
             background-color: rgba(248, 244, 240, 0.96);
             backdrop-filter: blur(12px);
             box-shadow: 0 1px 0 0 rgba(201, 169, 160, 0.08);
-        }
-
-        .stat-number {
-            font-variant-numeric: tabular-nums;
-        }
-
-        .modal {
-            animation: fadeInModal 0.2s ease forwards;
-        }
-
-        @keyframes fadeInModal {
-            from { opacity: 0; transform: scale(0.96); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .treatment-video {
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
         }
 
         .masonry-grid {
@@ -280,12 +251,16 @@
             display: none;
         }
 
-        .brow-accent {
-            color: #c9a9a0;
+        /* Global focus styles (a11y - keyboard users) */
+        :focus-visible {
+            outline: 2px solid var(--rose);
+            outline-offset: 3px;
+            border-radius: 6px;
         }
-
-        .luxury-border {
-            border-color: #e8d9d2;
+        button:focus-visible,
+        a:focus-visible,
+        .gallery-item:focus-visible {
+            outline-offset: 4px;
         }
     </style>
 </head>
@@ -297,7 +272,7 @@
                 <!-- Logo -->
                 <div class="flex items-center gap-x-3">
                     <div class="flex items-center gap-x-3">
-                        <img src="assets/images/real-logo.png" alt="Doktor Brew logo" class="h-9 w-auto">
+                        <img src="assets/images/real-logo.png" alt="Doktor Brew logo" width="250" height="250" class="h-9 w-auto">
                         <div class="flex flex-col -mt-0.5">
                             <span class="heading-serif text-[21px] font-semibold tracking-[2.5px] text-[#2f2522] leading-none">DOKTOR BREW</span>
                             <span class="text-[9px] font-medium tracking-[2px] text-[#8b6f5c] -mt-px">OLSZTYN</span>
@@ -317,12 +292,12 @@
 
                 <!-- CTA Buttons -->
                 <div class="hidden md:flex items-center gap-x-3">
-                    <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank"
+                    <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank" rel="noopener noreferrer"
                        class="px-6 py-2.5 rounded-full border border-[#c9a9a0] text-sm font-medium tracking-wide hover:bg-[#c9a9a0] hover:text-white transition-all flex items-center gap-x-2">
-                        <i class="fa-solid fa-calendar-check"></i>
+                        <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
                         <span>Booksy</span>
                     </a>
-                    <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank"
+                    <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank" rel="noopener noreferrer"
                        class="beauty-btn px-8 py-2.5 bg-[#2f2522] hover:bg-[#3f2e2a] text-white text-sm font-medium tracking-wider rounded-full flex items-center gap-x-2">
                         <span>ZAREZERWUJ</span>
                     </a>
@@ -350,7 +325,7 @@
                 <div class="pt-4 flex flex-col gap-3 border-t border-[#e8d9d2]">
                     <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank"
                        class="flex items-center justify-center gap-x-2 py-3.5 rounded-2xl border border-[#c9a9a0] text-base font-medium">
-                        <i class="fa-solid fa-calendar-check"></i>
+                        <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
                         <span>Zarezerwuj na Booksy</span>
                     </a>
                     <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank"
@@ -366,6 +341,7 @@
     <header class="relative min-h-[100dvh] flex items-center justify-center pt-20 overflow-hidden">
         <div class="absolute inset-0 bg-[#2f2522]">
             <img src="assets/images/real/interior-01.jpg" alt="Wnętrze studia Doktor Brew przy ul. Wyzwolenia w Olsztynie" 
+                 width="2340" height="1559"
                  class="absolute inset-0 w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-b from-black/35 via-black/25 to-black/60"></div>
         </div>
@@ -387,7 +363,7 @@
             </p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank"
+                <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank" rel="noopener noreferrer"
                    class="beauty-btn group w-full sm:w-auto flex items-center justify-center gap-x-3 px-10 py-[18px] bg-white hover:bg-[#f8f4f0] text-[#2f2522] rounded-full text-base font-semibold tracking-[1.5px]">
                     <span>ZAREZERWUJ WIZYTĘ</span>
                     <i class="fa-solid fa-arrow-right group-hover:translate-x-0.5 transition"></i>
@@ -457,7 +433,7 @@
                 <div class="relative">
                     <div class="aspect-[4/3.15] rounded-3xl overflow-hidden elegant-shadow border border-[#e8d9d2]">
                         <img src="assets/images/real/monika.jpg" alt="Monika Najmowicz - specjalistka stylizacji brwi i rzęs w Doktor Brew" 
-                             class="w-full h-full object-cover">
+                             width="1122" height="1402" class="w-full h-full object-cover">
                     </div>
                     <div class="absolute -bottom-5 -right-5 bg-white px-8 py-4 rounded-2xl border border-[#e8d9d2] elegant-shadow max-w-[260px]">
                         <div class="text-sm leading-tight">
@@ -481,10 +457,10 @@
 
             <!-- Tabs -->
             <div class="flex flex-wrap justify-center gap-2 mb-10" id="service-tabs">
-                <button data-tab="brwi" class="service-tab active px-7 py-2.5 text-sm rounded-3xl border border-[#c9a9a0] bg-[#c9a9a0] text-white font-medium">Brwi</button>
-                <button data-tab="rzesy" class="service-tab px-7 py-2.5 text-sm rounded-3xl border border-[#e8d9d2] hover:border-[#c9a9a0] font-medium">Rzęsy</button>
-                <button data-tab="permanent" class="service-tab px-7 py-2.5 text-sm rounded-3xl border border-[#e8d9d2] hover:border-[#c9a9a0] font-medium">Makijaż permanentny</button>
-                <button data-tab="szkolenia" class="service-tab px-7 py-2.5 text-sm rounded-3xl border border-[#e8d9d2] hover:border-[#c9a9a0] font-medium">Szkolenia</button>
+                <button type="button" data-tab="brwi" class="service-tab active px-7 py-2.5 text-sm rounded-3xl border border-[#c9a9a0] text-white font-medium">Brwi</button>
+                <button type="button" data-tab="rzesy" class="service-tab px-7 py-2.5 text-sm rounded-3xl border border-[#e8d9d2] hover:border-[#c9a9a0] font-medium">Rzęsy</button>
+                <button type="button" data-tab="permanent" class="service-tab px-7 py-2.5 text-sm rounded-3xl border border-[#e8d9d2] hover:border-[#c9a9a0] font-medium">Makijaż permanentny</button>
+                <button type="button" data-tab="szkolenia" class="service-tab px-7 py-2.5 text-sm rounded-3xl border border-[#e8d9d2] hover:border-[#c9a9a0] font-medium">Szkolenia</button>
             </div>
 
             <!-- Services Content -->
@@ -689,7 +665,7 @@
                             <p class="mt-5 text-lg text-[#3f2e2a]/90">Przekazujemy wiedzę i doświadczenie. Szkolenia indywidualne oraz grupowe z laminacji brwi, stylizacji henną, liftingu rzęs oraz makijażu permanentnego.</p>
                             
                             <div class="mt-9 flex flex-wrap gap-4">
-                                <a href="https://www.instagram.com/doktor.brew/" target="_blank" 
+                                <a href="https://www.instagram.com/doktor.brew/" target="_blank" rel="noopener noreferrer"
                                    class="inline-flex items-center px-6 py-3 border border-[#c9a9a0] rounded-2xl text-sm font-medium hover:bg-white transition">NAPISZ NA INSTAGRAMIE</a>
                                 <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank" 
                                    class="inline-flex items-center px-6 py-3 bg-[#2f2522] text-white rounded-2xl text-sm font-medium">ZAPYTAJ O TERMINY</a>
@@ -741,27 +717,27 @@
 
             <div id="gallery-grid" class="masonry-grid">
                 <!-- Ordered by the numbers the user prepended in the real/ directory -->
-                <div class="gallery-item"><img src="assets/images/real/1result-good-01.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 1"></div>
-                <div class="gallery-item"><img src="assets/images/real/2result-good-03.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 2"></div>
-                <div class="gallery-item"><img src="assets/images/real/3result-good-02.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 3"></div>
-                <div class="gallery-item"><img src="assets/images/real/4result-good-06.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 4"></div>
-                <div class="gallery-item"><img src="assets/images/real/5result-good-08.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 5"></div>
-                <div class="gallery-item"><img src="assets/images/real/6result-good-07.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 6"></div>
-                <div class="gallery-item"><img src="assets/images/real/7result-good-10.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 7"></div>
-                <div class="gallery-item"><img src="assets/images/real/8result-good-09.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 8"></div>
-                <div class="gallery-item"><img src="assets/images/real/9.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 9"></div>
+                <div class="gallery-item"><img src="assets/images/real/1result-good-01.jpg" loading="lazy" width="1200" height="800" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 1"></div>
+                <div class="gallery-item"><img src="assets/images/real/2result-good-03.jpg" loading="lazy" width="1200" height="800" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 2"></div>
+                <div class="gallery-item"><img src="assets/images/real/3result-good-02.jpg" loading="lazy" width="1200" height="800" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 3"></div>
+                <div class="gallery-item"><img src="assets/images/real/4result-good-06.jpg" loading="lazy" width="1200" height="800" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 4"></div>
+                <div class="gallery-item"><img src="assets/images/real/5result-good-08.jpg" loading="lazy" width="1200" height="800" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 5"></div>
+                <div class="gallery-item"><img src="assets/images/real/6result-good-07.jpg" loading="lazy" width="1200" height="800" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 6"></div>
+                <div class="gallery-item"><img src="assets/images/real/7result-good-10.jpg" loading="lazy" width="1200" height="800" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 7"></div>
+                <div class="gallery-item"><img src="assets/images/real/8result-good-09.jpg" loading="lazy" width="1200" height="800" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 8"></div>
+                <div class="gallery-item"><img src="assets/images/real/9.jpg" loading="lazy" width="1200" height="800" class="w-full h-auto rounded-2xl object-cover" alt="Efekt 9"></div>
 
                 <!-- Remaining images hidden behind Load More (from booksy + good) -->
-                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-02.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Szczegół brwi po stylizacji"></div>
-                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-03.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Brwi po hennie pudrowej"></div>
-                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-04.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Ekstremalne zbliżenie brwi i rzęs"></div>
-                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-05.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Zbliżenie oka po liftingu"></div>
-                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-06.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Brwi po laminacji"></div>
-                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-07.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Portret z uniesionymi brwiami"></div>
-                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-08.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Zbliżenie brwi po zabiegu"></div>
-                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-09.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Brwi z wyraźnym kształtem"></div>
-                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-10.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Zbliżenie oka i brwi"></div>
-                <div class="gallery-item hidden-more"><img src="assets/images/real/result-good-05.jpg" class="w-full h-auto rounded-2xl object-cover" alt="Klientka z pięknymi brwiami"></div>
+                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-02.jpg" loading="lazy" width="1100" height="850" class="w-full h-auto rounded-2xl object-cover" alt="Szczegół brwi po stylizacji"></div>
+                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-03.jpg" loading="lazy" width="1100" height="850" class="w-full h-auto rounded-2xl object-cover" alt="Brwi po hennie pudrowej"></div>
+                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-04.jpg" loading="lazy" width="1100" height="850" class="w-full h-auto rounded-2xl object-cover" alt="Ekstremalne zbliżenie brwi i rzęs"></div>
+                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-05.jpg" loading="lazy" width="1100" height="850" class="w-full h-auto rounded-2xl object-cover" alt="Zbliżenie oka po liftingu"></div>
+                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-06.jpg" loading="lazy" width="1100" height="850" class="w-full h-auto rounded-2xl object-cover" alt="Brwi po laminacji"></div>
+                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-07.jpg" loading="lazy" width="1100" height="850" class="w-full h-auto rounded-2xl object-cover" alt="Portret z uniesionymi brwiami"></div>
+                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-08.jpg" loading="lazy" width="1100" height="850" class="w-full h-auto rounded-2xl object-cover" alt="Zbliżenie brwi po zabiegu"></div>
+                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-09.jpg" loading="lazy" width="1100" height="850" class="w-full h-auto rounded-2xl object-cover" alt="Brwi z wyraźnym kształtem"></div>
+                <div class="gallery-item hidden-more"><img src="assets/images/real/result-brew-10.jpg" loading="lazy" width="1100" height="850" class="w-full h-auto rounded-2xl object-cover" alt="Zbliżenie oka i brwi"></div>
+                <div class="gallery-item hidden-more"><img src="assets/images/real/result-good-05.jpg" loading="lazy" width="1100" height="850" class="w-full h-auto rounded-2xl object-cover" alt="Klientka z pięknymi brwiami"></div>
             </div>
 
             <div class="flex justify-center mt-8">
@@ -828,7 +804,7 @@
             <!-- Studio photo + info -->
             <div class="lg:col-span-7">
                 <div class="relative rounded-3xl overflow-hidden aspect-[16/9.5] elegant-shadow border border-[#e8d9d2]">
-                    <img src="assets/images/real/interior-02.jpg" alt="Eleganckie wnętrze studia Doktor Brew przy ul. Wyzwolenia w Olsztynie" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="assets/images/real/interior-02.jpg" alt="Eleganckie wnętrze studia Doktor Brew przy ul. Wyzwolenia w Olsztynie" width="2340" height="1559" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-b from-black/15 to-black/40"></div>
                     <div class="absolute bottom-0 left-0 p-9 text-white">
                         <div class="text-xs tracking-[3px] opacity-75">PRZYJMUJEMY W</div>
@@ -864,11 +840,11 @@
                 <div>
                     <div class="uppercase text-xs tracking-[3px] text-[#c9a9a0] mb-3">ŚLEDŹ NAS</div>
                     <div class="flex gap-3">
-                        <a href="https://www.instagram.com/doktor.brew/" target="_blank" class="flex-1 flex items-center justify-center gap-x-2 bg-white border border-[#e8d9d2] hover:border-[#c9a9a0] transition-colors py-[13px] rounded-2xl text-sm font-medium">
-                            <i class="fa-brands fa-instagram"></i> <span>Instagram</span>
+                        <a href="https://www.instagram.com/doktor.brew/" target="_blank" rel="noopener noreferrer" class="flex-1 flex items-center justify-center gap-x-2 bg-white border border-[#e8d9d2] hover:border-[#c9a9a0] transition-colors py-[13px] rounded-2xl text-sm font-medium">
+                            <i class="fa-brands fa-instagram" aria-hidden="true"></i> <span>Instagram</span>
                         </a>
-                        <a href="https://www.facebook.com/DoktorBrew/" target="_blank" class="flex-1 flex items-center justify-center gap-x-2 bg-white border border-[#e8d9d2] hover:border-[#c9a9a0] transition-colors py-[13px] rounded-2xl text-sm font-medium">
-                            <i class="fa-brands fa-facebook"></i> <span>Facebook</span>
+                        <a href="https://www.facebook.com/DoktorBrew/" target="_blank" rel="noopener noreferrer" class="flex-1 flex items-center justify-center gap-x-2 bg-white border border-[#e8d9d2] hover:border-[#c9a9a0] transition-colors py-[13px] rounded-2xl text-sm font-medium">
+                            <i class="fa-brands fa-facebook" aria-hidden="true"></i> <span>Facebook</span>
                         </a>
                     </div>
                 </div>
@@ -890,10 +866,10 @@
                 <div class="heading-serif text-5xl tracking-tighter">Gotowa na piękne brwi?</div>
                 <p class="mt-3 text-white/70">Zarezerwuj termin online — najwygodniej przez Booksy. Czekamy na Ciebie.</p>
                 
-                <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank"
+                <a href="https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn" target="_blank" rel="noopener noreferrer"
                    class="mt-8 inline-flex beauty-btn items-center gap-x-3 bg-white text-[#2f2522] px-12 py-4 rounded-2xl font-semibold text-sm tracking-[1.5px]">
                     ZAREZERWUJ WIZYTĘ NA BOOKSY
-                    <i class="fa-solid fa-external-link-alt ml-1"></i>
+                    <i class="fa-solid fa-external-link-alt ml-1" aria-hidden="true"></i>
                 </a>
                 
                 <div class="mt-5 text-xs text-white/50">Lub zadzwoń: +48 792 910 809</div>
@@ -915,26 +891,36 @@
     </footer>
 
     <!-- LIGHTBOX MODAL -->
-    <div id="lightbox" class="hidden fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4 md:p-8" onclick="closeLightbox()">
+    <div id="lightbox" role="dialog" aria-modal="true" aria-label="Powiększone zdjęcie" class="hidden fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4 md:p-8" onclick="closeLightbox()">
         <div class="max-w-5xl w-full relative" onclick="event.stopImmediatePropagation()">
-            <button onclick="closeLightbox()" class="absolute -top-4 -right-4 md:-top-3 md:-right-3 w-11 h-11 flex items-center justify-center text-white/70 hover:text-white z-10">
-                <i class="fa-solid fa-times text-3xl"></i>
+            <button onclick="closeLightbox()" aria-label="Zamknij podgląd zdjęcia" class="absolute -top-4 -right-4 md:-top-3 md:-right-3 w-11 h-11 flex items-center justify-center text-white/70 hover:text-white z-10">
+                <i class="fa-solid fa-times text-3xl" aria-hidden="true"></i>
             </button>
-            <img id="lightbox-image" class="w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl" alt="">
-            <div id="lightbox-caption" class="text-center text-white/70 text-sm mt-4 tracking-wide"></div>
+            <img id="lightbox-image" class="w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl" alt="Powiększone zdjęcie efektu">
+            <div id="lightbox-caption" class="text-center text-white/70 text-sm mt-4 tracking-wide" aria-hidden="true"></div>
         </div>
     </div>
 
     <script>
+        // === CENTRAL CONSTANTS ===
+        // BOOKING_URL is the single source of truth for the external booking link.
+        // wireBookingLinks() (called on init) updates all matching anchors at runtime.
+        // Note: In a pure static site we cannot fully eliminate the literal URL strings
+        // from the HTML source without a build/templating step. Keep the values in sync
+        // when changing the booking URL in the future.
+        const BOOKING_URL = 'https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn';
+        let lastLightboxTrigger = null;
+
         // Tailwind script configuration
         function initTailwind() {
-            document.documentElement.style.setProperty('--accent', '#c9a9a0');
+            // No-op kept for potential future Tailwind script config
         }
         
         // Mobile menu
         function initMobileMenu() {
             const btn = document.getElementById('mobile-menu-btn');
             const menu = document.getElementById('mobile-menu');
+            if (!btn || !menu) return;
             
             btn.addEventListener('click', () => {
                 menu.classList.toggle('hidden');
@@ -943,12 +929,15 @@
                 icon.classList.toggle('fa-times');
             });
             
-            // Close on link click
-            document.querySelectorAll('.mobile-link').forEach(link => {
+            // Close on any link inside the mobile menu (covers nav links + booking CTAs)
+            menu.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     menu.classList.add('hidden');
-                    btn.querySelector('i').classList.add('fa-bars');
-                    btn.querySelector('i').classList.remove('fa-times');
+                    const icon = btn.querySelector('i');
+                    if (icon) {
+                        icon.classList.add('fa-bars');
+                        icon.classList.remove('fa-times');
+                    }
                 });
             });
         }
@@ -956,7 +945,6 @@
         // Navbar scroll effect
         function initNavbar() {
             const nav = document.getElementById('nav');
-            let lastScroll = 0;
             
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 80) {
@@ -976,11 +964,11 @@
                 tab.addEventListener('click', () => {
                     const target = tab.dataset.tab;
                     
-                    // Update active tab styles
-                    tabs.forEach(t => t.classList.remove('active', 'bg-[#c9a9a0]', 'text-white', 'border-[#c9a9a0]'));
+                    // Update active tab styles (colors now driven by .service-tab.active CSS rule + CSS vars)
+                    tabs.forEach(t => t.classList.remove('active', 'text-white', 'border-[#c9a9a0]', 'bg-[#c9a9a0]'));
                     tabs.forEach(t => t.classList.add('border-[#e8d9d2]'));
                     
-                    tab.classList.add('active', 'bg-[#c9a9a0]', 'text-white', 'border-[#c9a9a0]');
+                    tab.classList.add('active', 'text-white', 'border-[#c9a9a0]');
                     tab.classList.remove('border-[#e8d9d2]');
                     
                     // Show correct content
@@ -991,76 +979,97 @@
             });
         }
         
-        // Gallery filters + lightbox
-        let currentFilter = 'all';
-        
+        // Gallery lightbox (filters were never implemented in markup; removed dead code)
         function initGallery() {
-            const filters = document.querySelectorAll('.gallery-filter');
             const items = document.querySelectorAll('#gallery-grid .gallery-item');
             
-            filters.forEach(filter => {
-                filter.addEventListener('click', () => {
-                    const filterType = filter.dataset.filter;
-                    currentFilter = filterType;
-                    
-                    // Update active button
-                    filters.forEach(f => f.classList.remove('active', 'bg-[#2f2522]', 'text-white', 'border-[#2f2522]'));
-                    filters.forEach(f => f.classList.add('border-[#e8d9d2]'));
-                    filter.classList.add('active', 'bg-[#2f2522]', 'text-white', 'border-[#2f2522]');
-                    filter.classList.remove('border-[#e8d9d2]');
-                    
-                    // Filter items
-                    items.forEach(item => {
-                        if (filterType === 'all') {
-                            item.style.display = '';
-                        } else {
-                            if (item.dataset.category === filterType) {
-                                item.style.display = '';
-                            } else {
-                                item.style.display = 'none';
-                            }
-                        }
-                    });
-                });
-            });
-            
-            // Lightbox on gallery item click
-            items.forEach(item => {
-                item.addEventListener('click', () => {
-                    const img = item.querySelector('img');
-                    const caption = item.querySelector('div')?.textContent || '';
-                    
-                    openLightbox(img.src, caption);
+            items.forEach((item, index) => {
+                // Make keyboard accessible (a11y)
+                item.setAttribute('role', 'button');
+                item.setAttribute('tabindex', '0');
+                const img = item.querySelector('img');
+                if (img) {
+                    const label = img.alt ? 'Powiększ zdjęcie: ' + img.alt : 'Powiększ zdjęcie';
+                    item.setAttribute('aria-label', label);
+                }
+
+                const openThis = () => {
+                    const imgEl = item.querySelector('img');
+                    openLightbox(imgEl.src, '');
+                };
+
+                item.addEventListener('click', openThis);
+                item.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openThis();
+                    }
                 });
             });
         }
         
         function openLightbox(src, caption) {
+            lastLightboxTrigger = document.activeElement;
             const modal = document.getElementById('lightbox');
+            if (!modal) return;
+
             const img = document.getElementById('lightbox-image');
             const cap = document.getElementById('lightbox-caption');
             
-            img.src = src;
-            cap.textContent = caption;
+            if (img) img.src = src;
+            if (cap) cap.textContent = caption;
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             document.body.style.overflow = 'hidden';
+            // Focus the close button for keyboard users
+            const closeBtn = modal.querySelector('button');
+            if (closeBtn) closeBtn.focus();
         }
         
         function closeLightbox() {
             const modal = document.getElementById('lightbox');
+            if (!modal) return;
+
             modal.classList.remove('flex');
             modal.classList.add('hidden');
             document.body.style.overflow = '';
+            // Return focus to the gallery item that opened it
+            if (lastLightboxTrigger && lastLightboxTrigger.focus) {
+                lastLightboxTrigger.focus();
+            }
+            lastLightboxTrigger = null;
         }
         
-        // Keyboard support for lightbox
+        // Keyboard support for lightbox (Escape + minimal focus trap)
         function initLightboxKeyboard() {
             document.addEventListener('keydown', (e) => {
+                const modal = document.getElementById('lightbox');
+                if (!modal || modal.classList.contains('hidden')) return;
+
                 if (e.key === 'Escape') {
-                    const modal = document.getElementById('lightbox');
-                    if (!modal.classList.contains('hidden')) {
-                        closeLightbox();
+                    closeLightbox();
+                    return;
+                }
+
+                // Minimal focus trap for Tab / Shift+Tab inside the dialog.
+                // Sufficient for the current lightbox (single close button). If more
+                // controls are added later, consider a more robust inert + roving pattern.
+                if (e.key === 'Tab') {
+                    const focusables = modal.querySelectorAll(
+                        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                    );
+                    if (!focusables.length) return;
+
+                    const first = focusables[0];
+                    const last = focusables[focusables.length - 1];
+                    const active = document.activeElement;
+
+                    if (e.shiftKey && active === first) {
+                        e.preventDefault();
+                        last.focus();
+                    } else if (!e.shiftKey && active === last) {
+                        e.preventDefault();
+                        first.focus();
                     }
                 }
             });
@@ -1080,18 +1089,12 @@
                         
                         // Close mobile menu if open
                         const menu = document.getElementById('mobile-menu');
-                        if (!menu.classList.contains('hidden')) {
+                        if (menu && !menu.classList.contains('hidden')) {
                             menu.classList.add('hidden');
                         }
                     }
                 });
             });
-        }
-        
-        // Floating booking hint (subtle)
-        function initFloatingCTA() {
-            // Already have strong CTAs everywhere — this is optional polish
-            // Could add scroll-triggered mini bar if desired
         }
         
         // Initialize everything
@@ -1103,7 +1106,7 @@
             initGallery();
             initLightboxKeyboard();
             initSmoothScroll();
-            initFloatingCTA();
+            wireBookingLinks();
             
             // Show Brwi tab by default (already set in HTML)
             // Pre-select first tab correctly
@@ -1111,9 +1114,15 @@
             if (firstTab) {
                 // Already styled in HTML as active
             }
-            
-            // Accessibility: close lightbox on backdrop click is already set
-            console.log('%c[Doktor Brew] Stunning website initialized successfully.', 'color:#c9a9a0');
+        }
+
+        // Wire the single source of truth for all booking links (DRY + future-proof)
+        function wireBookingLinks() {
+            document.querySelectorAll('a[href*="booksy.com"]').forEach(a => {
+                a.href = BOOKING_URL;
+                a.target = '_blank';
+                a.rel = 'noopener noreferrer';
+            });
         }
         
         // Boot
@@ -1153,14 +1162,24 @@
             if (!grid) return;
 
             const styles = window.getComputedStyle(grid);
-            const rowHeight = parseFloat(styles.getPropertyValue('grid-auto-rows'));
-            const rowGap = parseFloat(styles.getPropertyValue('row-gap'));
+            let rowHeight = parseFloat(styles.getPropertyValue('grid-auto-rows'));
+            let rowGap = parseFloat(styles.getPropertyValue('row-gap'));
+
+            if (isNaN(rowHeight) || isNaN(rowGap)) {
+                rowHeight = 8;
+                rowGap = 16;
+            }
 
             grid.querySelectorAll('.gallery-item').forEach(item => {
                 item.style.gridRowEnd = '';
                 if (item.offsetParent === null) return;
 
                 const image = item.querySelector('img');
+                if (image && !image.complete) {
+                    // Wait for this image before measuring
+                    image.addEventListener('load', () => applyMasonryLayout(), { once: true });
+                    return;
+                }
                 const contentHeight = image ? image.getBoundingClientRect().height : item.getBoundingClientRect().height;
                 const rowSpan = Math.ceil((contentHeight + rowGap) / (rowHeight + rowGap));
                 item.style.gridRowEnd = `span ${rowSpan}`;
