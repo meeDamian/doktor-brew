@@ -161,22 +161,6 @@
             transform: scale(1.08);
         }
 
-        .section-heading {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-heading:after {
-            content: '';
-            position: absolute;
-            bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 48px;
-            height: 1px;
-            background: linear-gradient(to right, transparent, #c9a9a0, transparent);
-        }
-
         .beauty-btn {
             transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
             position: relative;
@@ -207,33 +191,10 @@
             box-shadow: 0 10px 15px -3px rgb(47 37 34 / 0.08), 0 4px 6px -4px rgb(47 37 34 / 0.08);
         }
 
-        .soft-bg {
-            background-color: #f8f4f0;
-        }
-
         .nav-scrolled {
             background-color: rgba(248, 244, 240, 0.96);
             backdrop-filter: blur(12px);
             box-shadow: 0 1px 0 0 rgba(201, 169, 160, 0.08);
-        }
-
-        .stat-number {
-            font-variant-numeric: tabular-nums;
-        }
-
-        .modal {
-            animation: fadeInModal 0.2s ease forwards;
-        }
-
-        @keyframes fadeInModal {
-            from { opacity: 0; transform: scale(0.96); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .treatment-video {
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
         }
 
         .masonry-grid {
@@ -278,14 +239,6 @@
 
         .hidden-more {
             display: none;
-        }
-
-        .brow-accent {
-            color: #c9a9a0;
-        }
-
-        .luxury-border {
-            border-color: #e8d9d2;
         }
     </style>
 </head>
@@ -956,7 +909,6 @@
         // Navbar scroll effect
         function initNavbar() {
             const nav = document.getElementById('nav');
-            let lastScroll = 0;
             
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 80) {
@@ -991,38 +943,9 @@
             });
         }
         
-        // Gallery filters + lightbox
-        let currentFilter = 'all';
-        
+        // Gallery lightbox (filters were never implemented in markup; removed dead code)
         function initGallery() {
-            const filters = document.querySelectorAll('.gallery-filter');
             const items = document.querySelectorAll('#gallery-grid .gallery-item');
-            
-            filters.forEach(filter => {
-                filter.addEventListener('click', () => {
-                    const filterType = filter.dataset.filter;
-                    currentFilter = filterType;
-                    
-                    // Update active button
-                    filters.forEach(f => f.classList.remove('active', 'bg-[#2f2522]', 'text-white', 'border-[#2f2522]'));
-                    filters.forEach(f => f.classList.add('border-[#e8d9d2]'));
-                    filter.classList.add('active', 'bg-[#2f2522]', 'text-white', 'border-[#2f2522]');
-                    filter.classList.remove('border-[#e8d9d2]');
-                    
-                    // Filter items
-                    items.forEach(item => {
-                        if (filterType === 'all') {
-                            item.style.display = '';
-                        } else {
-                            if (item.dataset.category === filterType) {
-                                item.style.display = '';
-                            } else {
-                                item.style.display = 'none';
-                            }
-                        }
-                    });
-                });
-            });
             
             // Lightbox on gallery item click
             items.forEach(item => {
@@ -1088,12 +1011,6 @@
             });
         }
         
-        // Floating booking hint (subtle)
-        function initFloatingCTA() {
-            // Already have strong CTAs everywhere — this is optional polish
-            // Could add scroll-triggered mini bar if desired
-        }
-        
         // Initialize everything
         function initializeWebsite() {
             initTailwind();
@@ -1103,7 +1020,6 @@
             initGallery();
             initLightboxKeyboard();
             initSmoothScroll();
-            initFloatingCTA();
             
             // Show Brwi tab by default (already set in HTML)
             // Pre-select first tab correctly
@@ -1111,9 +1027,6 @@
             if (firstTab) {
                 // Already styled in HTML as active
             }
-            
-            // Accessibility: close lightbox on backdrop click is already set
-            console.log('%c[Doktor Brew] Stunning website initialized successfully.', 'color:#c9a9a0');
         }
         
         // Boot
