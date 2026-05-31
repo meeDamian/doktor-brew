@@ -127,7 +127,7 @@
             height: 1px;
             bottom: -2px;
             left: 0;
-            background-color: #c9a9a0;
+            background-color: var(--rose);
             transition: width 0.3s ease;
         }
         
@@ -149,9 +149,9 @@
         }
         
         .service-tab.active {
-            background-color: #c9a9a0;
+            background-color: var(--rose);
             color: white;
-            border-color: #c9a9a0;
+            border-color: var(--rose);
         }
 
         .gallery-item {
@@ -251,6 +251,27 @@
 
         .hidden-more {
             display: none;
+        }
+
+        /* Micro utilities for DRY (replaces repeated container + card patterns) */
+        .site-container {
+            max-width: 1536px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+        @media (min-width: 1024px) {
+            .site-container {
+                padding-left: 3rem;
+                padding-right: 3rem;
+            }
+        }
+
+        .service-card {
+            background-color: #f8f4f0;
+            border: 1px solid #e8d9d2;
+            border-radius: 1.5rem;
         }
     </style>
 </head>
@@ -892,9 +913,12 @@
     </div>
 
     <script>
+        // === CENTRAL CONSTANTS (single source of truth for maintenance) ===
+        const BOOKING_URL = 'https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn';
+
         // Tailwind script configuration
         function initTailwind() {
-            document.documentElement.style.setProperty('--accent', '#c9a9a0');
+            document.documentElement.style.setProperty('--accent', 'var(--rose)');
         }
         
         // Mobile menu
@@ -941,11 +965,11 @@
                 tab.addEventListener('click', () => {
                     const target = tab.dataset.tab;
                     
-                    // Update active tab styles
-                    tabs.forEach(t => t.classList.remove('active', 'bg-[#c9a9a0]', 'text-white', 'border-[#c9a9a0]'));
+                    // Update active tab styles (colors now driven by .service-tab.active CSS rule + CSS vars)
+                    tabs.forEach(t => t.classList.remove('active', 'text-white', 'border-[#c9a9a0]'));
                     tabs.forEach(t => t.classList.add('border-[#e8d9d2]'));
                     
-                    tab.classList.add('active', 'bg-[#c9a9a0]', 'text-white', 'border-[#c9a9a0]');
+                    tab.classList.add('active', 'text-white', 'border-[#c9a9a0]');
                     tab.classList.remove('border-[#e8d9d2]');
                     
                     // Show correct content
