@@ -1008,8 +1008,7 @@
 
                 const openThis = () => {
                     const imgEl = item.querySelector('img');
-                    const caption = item.querySelector('div')?.textContent || '';
-                    openLightbox(imgEl.src, caption);
+                    openLightbox(imgEl.src, '');
                 };
 
                 item.addEventListener('click', openThis);
