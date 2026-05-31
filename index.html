@@ -80,11 +80,23 @@
     <meta name="theme-color" content="#f8f4f0">
     <meta name="msapplication-TileColor" content="#f8f4f0">
 
+    <!-- Resource hints for CDNs + critical assets (perf) -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+    <!-- Preload LCP hero image -->
+    <link rel="preload" as="image" href="assets/images/real/interior-01.jpg" fetchpriority="high">
+
+    <!-- Google Fonts (moved out of @import for better parallelism + caching) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&amp;family=Inter:wght@300;400;500&amp;display=swap">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&amp;family=Inter:wght@300;400;500&amp;family=Playfair+Display+SC:wght@400&amp;display=swap');
-        
         :root {
             --cream: #f8f4f0;
             --blush: #e8d9d2;
