@@ -273,6 +273,18 @@
             border: 1px solid #e8d9d2;
             border-radius: 1.5rem;
         }
+
+        /* Global focus styles (a11y - keyboard users) */
+        :focus-visible {
+            outline: 2px solid var(--rose);
+            outline-offset: 3px;
+            border-radius: 6px;
+        }
+        button:focus-visible,
+        a:focus-visible,
+        .gallery-item:focus-visible {
+            outline-offset: 4px;
+        }
     </style>
 </head>
 <body class="bg-[#f8f4f0] text-[#2f2522] antialiased">
@@ -851,11 +863,11 @@
                 <div>
                     <div class="uppercase text-xs tracking-[3px] text-[#c9a9a0] mb-3">ŚLEDŹ NAS</div>
                     <div class="flex gap-3">
-                        <a href="https://www.instagram.com/doktor.brew/" target="_blank" class="flex-1 flex items-center justify-center gap-x-2 bg-white border border-[#e8d9d2] hover:border-[#c9a9a0] transition-colors py-[13px] rounded-2xl text-sm font-medium">
-                            <i class="fa-brands fa-instagram"></i> <span>Instagram</span>
+                        <a href="https://www.instagram.com/doktor.brew/" target="_blank" rel="noopener noreferrer" class="flex-1 flex items-center justify-center gap-x-2 bg-white border border-[#e8d9d2] hover:border-[#c9a9a0] transition-colors py-[13px] rounded-2xl text-sm font-medium">
+                            <i class="fa-brands fa-instagram" aria-hidden="true"></i> <span>Instagram</span>
                         </a>
-                        <a href="https://www.facebook.com/DoktorBrew/" target="_blank" class="flex-1 flex items-center justify-center gap-x-2 bg-white border border-[#e8d9d2] hover:border-[#c9a9a0] transition-colors py-[13px] rounded-2xl text-sm font-medium">
-                            <i class="fa-brands fa-facebook"></i> <span>Facebook</span>
+                        <a href="https://www.facebook.com/DoktorBrew/" target="_blank" rel="noopener noreferrer" class="flex-1 flex items-center justify-center gap-x-2 bg-white border border-[#e8d9d2] hover:border-[#c9a9a0] transition-colors py-[13px] rounded-2xl text-sm font-medium">
+                            <i class="fa-brands fa-facebook" aria-hidden="true"></i> <span>Facebook</span>
                         </a>
                     </div>
                 </div>
@@ -902,19 +914,20 @@
     </footer>
 
     <!-- LIGHTBOX MODAL -->
-    <div id="lightbox" class="hidden fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4 md:p-8" onclick="closeLightbox()">
+    <div id="lightbox" role="dialog" aria-modal="true" aria-label="Powiększone zdjęcie" class="hidden fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4 md:p-8" onclick="closeLightbox()">
         <div class="max-w-5xl w-full relative" onclick="event.stopImmediatePropagation()">
-            <button onclick="closeLightbox()" class="absolute -top-4 -right-4 md:-top-3 md:-right-3 w-11 h-11 flex items-center justify-center text-white/70 hover:text-white z-10">
-                <i class="fa-solid fa-times text-3xl"></i>
+            <button onclick="closeLightbox()" aria-label="Zamknij podgląd zdjęcia" class="absolute -top-4 -right-4 md:-top-3 md:-right-3 w-11 h-11 flex items-center justify-center text-white/70 hover:text-white z-10 focus:outline-none">
+                <i class="fa-solid fa-times text-3xl" aria-hidden="true"></i>
             </button>
-            <img id="lightbox-image" class="w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl" alt="">
-            <div id="lightbox-caption" class="text-center text-white/70 text-sm mt-4 tracking-wide"></div>
+            <img id="lightbox-image" class="w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl" alt="Powiększone zdjęcie efektu">
+            <div id="lightbox-caption" class="text-center text-white/70 text-sm mt-4 tracking-wide" aria-hidden="true"></div>
         </div>
     </div>
 
     <script>
         // === CENTRAL CONSTANTS (single source of truth for maintenance) ===
         const BOOKING_URL = 'https://booksy.com/pl-pl/132930_doktor-brew_brwi-i-rzesy_4934_olsztyn';
+        let lastLightboxTrigger = null;
 
         // Tailwind script configuration
         function initTailwind() {
@@ -984,18 +997,33 @@
         function initGallery() {
             const items = document.querySelectorAll('#gallery-grid .gallery-item');
             
-            // Lightbox on gallery item click
-            items.forEach(item => {
-                item.addEventListener('click', () => {
-                    const img = item.querySelector('img');
+            items.forEach((item, index) => {
+                // Make keyboard accessible (a11y)
+                item.setAttribute('role', 'button');
+                item.setAttribute('tabindex', '0');
+                const img = item.querySelector('img');
+                if (img && img.alt) {
+                    item.setAttribute('aria-label', 'Powiększ zdjęcie: ' + img.alt);
+                }
+
+                const openThis = () => {
+                    const imgEl = item.querySelector('img');
                     const caption = item.querySelector('div')?.textContent || '';
-                    
-                    openLightbox(img.src, caption);
+                    openLightbox(imgEl.src, caption);
+                };
+
+                item.addEventListener('click', openThis);
+                item.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openThis();
+                    }
                 });
             });
         }
         
         function openLightbox(src, caption) {
+            lastLightboxTrigger = document.activeElement;
             const modal = document.getElementById('lightbox');
             const img = document.getElementById('lightbox-image');
             const cap = document.getElementById('lightbox-caption');
@@ -1005,6 +1033,9 @@
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             document.body.style.overflow = 'hidden';
+            // Focus the close button for keyboard users
+            const closeBtn = modal.querySelector('button');
+            if (closeBtn) closeBtn.focus();
         }
         
         function closeLightbox() {
@@ -1012,6 +1043,11 @@
             modal.classList.remove('flex');
             modal.classList.add('hidden');
             document.body.style.overflow = '';
+            // Return focus to the gallery item that opened it
+            if (lastLightboxTrigger && lastLightboxTrigger.focus) {
+                lastLightboxTrigger.focus();
+            }
+            lastLightboxTrigger = null;
         }
         
         // Keyboard support for lightbox
