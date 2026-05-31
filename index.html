@@ -480,10 +480,10 @@
 
             <!-- Tabs -->
             <div class="flex flex-wrap justify-center gap-2 mb-10" id="service-tabs">
-                <button data-tab="brwi" class="service-tab active px-7 py-2.5 text-sm rounded-3xl border border-[#c9a9a0] bg-[#c9a9a0] text-white font-medium">Brwi</button>
-                <button data-tab="rzesy" class="service-tab px-7 py-2.5 text-sm rounded-3xl border border-[#e8d9d2] hover:border-[#c9a9a0] font-medium">Rzęsy</button>
-                <button data-tab="permanent" class="service-tab px-7 py-2.5 text-sm rounded-3xl border border-[#e8d9d2] hover:border-[#c9a9a0] font-medium">Makijaż permanentny</button>
-                <button data-tab="szkolenia" class="service-tab px-7 py-2.5 text-sm rounded-3xl border border-[#e8d9d2] hover:border-[#c9a9a0] font-medium">Szkolenia</button>
+                <button type="button" data-tab="brwi" class="service-tab active px-7 py-2.5 text-sm rounded-3xl border border-[#c9a9a0] bg-[#c9a9a0] text-white font-medium">Brwi</button>
+                <button type="button" data-tab="rzesy" class="service-tab px-7 py-2.5 text-sm rounded-3xl border border-[#e8d9d2] hover:border-[#c9a9a0] font-medium">Rzęsy</button>
+                <button type="button" data-tab="permanent" class="service-tab px-7 py-2.5 text-sm rounded-3xl border border-[#e8d9d2] hover:border-[#c9a9a0] font-medium">Makijaż permanentny</button>
+                <button type="button" data-tab="szkolenia" class="service-tab px-7 py-2.5 text-sm rounded-3xl border border-[#e8d9d2] hover:border-[#c9a9a0] font-medium">Szkolenia</button>
             </div>
 
             <!-- Services Content -->
@@ -1147,6 +1147,11 @@
                 if (item.offsetParent === null) return;
 
                 const image = item.querySelector('img');
+                if (image && !image.complete) {
+                    // Wait for this image before measuring
+                    image.addEventListener('load', () => applyMasonryLayout(), { once: true });
+                    return;
+                }
                 const contentHeight = image ? image.getBoundingClientRect().height : item.getBoundingClientRect().height;
                 const rowSpan = Math.ceil((contentHeight + rowGap) / (rowHeight + rowGap));
                 item.style.gridRowEnd = `span ${rowSpan}`;
